@@ -3,7 +3,7 @@
 ---
 ### Member
 * 김현정
-* 이다운
+* 이다운 (조장)
 * 이정은
 * 최지원
 * 황재진
@@ -21,3 +21,22 @@
 
 ## 문제
 1. Re-direction VS Web-View
+
+## Layout
+1. Login View
+   (카카오, 네이버, 구글 연동)
+1-1. Join View
+
+2. Main
+   (게시글 모아보기)
+   
+3. Video
+   (영상 모아보기)
+   
+4. Scrap
+   (좋아요 모아보기)
+   
+5. Push
+   (Push 모아보기)
+   
+All. Search, Menu_Bar
