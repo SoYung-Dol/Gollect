@@ -24,22 +24,32 @@
 
 ## Layout
 1. Login View
+
    (카카오, 네이버, 구글 연동)
-1-1. Join View
+1-1. Survey View
+
+   (어떤 커뮤니티글 가져올지)
 
 2. Main
+
    (게시글 모아보기)
+
    (한 화면에 8개의 게시글정도)
    
 3. Video
+
    (영상 모아보기)
+   
    (한 화면에 6개 정도)
    
 4. Scrap
+
    (좋아요 모아보기)
+   
    (게시글과 영상 두개 다 해야함)
    
 5. Push
    (Push 모아보기)
    
-All. Search, Menu_Bar
+   All. Search, Menu_Bar
+   (로그아웃, 계정설정)
