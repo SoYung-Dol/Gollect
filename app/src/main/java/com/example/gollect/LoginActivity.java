@@ -75,6 +75,7 @@ public class LoginActivity extends BaseActivity {
             editor.putString("google_profile",acct.getPhotoUrl()+"");
             editor.commit();
 
+//test
 //            if(first_google_login) {
 //                first_google_login = false;
 //                googleLoginStep1();
