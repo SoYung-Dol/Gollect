@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "414477547406",
+    "firebase_url": "https://gollect-a0370.firebaseio.com",
+    "project_id": "gollect-a0370",
+    "storage_bucket": "gollect-a0370.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414477547406:android:8dc656472c13939e6896df",
+        "android_client_info": {
+          "package_name": "com.example.gollect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414477547406-fllv12fs3ai0oif6rn5fbbv91b0lrn9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq7FPGbv7elu_ENQ2ij4MTu3TdHPp-_XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414477547406-fllv12fs3ai0oif6rn5fbbv91b0lrn9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
