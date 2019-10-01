@@ -69,13 +69,13 @@ public class LoginActivity extends BaseActivity {
             if(DEBUG_LOG) Log.d(TAG,"Google Login Successed");
             GoogleSignInAccount acct = result.getSignInAccount();
 
+
             SharedPreferences.Editor editor = loginInfoPreferences.edit();
             editor.putString("google_name", acct.getDisplayName());
             editor.putString("google_id", acct.getId()+"");
             editor.putString("google_profile",acct.getPhotoUrl()+"");
             editor.commit();
 
-//test
 //            if(first_google_login) {
 //                first_google_login = false;
 //                googleLoginStep1();
