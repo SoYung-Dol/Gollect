@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:414477547406:android:8dc656472c13939e6896df",
+        "mobilesdk_app_id": "1:414477547406:android:ec909e87f3a6074d6896df",
         "android_client_info": {
           "package_name": "com.example.gollect"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "414477547406-rnle6lu8fhi9q9iss2etdc875v1iojrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gollect",
+            "certificate_hash": "fae9990fd7252fff84630678c155d034039d4ff8"
+          }
+        },
         {
           "client_id": "414477547406-fllv12fs3ai0oif6rn5fbbv91b0lrn9q.apps.googleusercontent.com",
           "client_type": 3
