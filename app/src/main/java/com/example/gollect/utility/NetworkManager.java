@@ -1,157 +1,89 @@
 package com.example.gollect.utility;
 import android.os.AsyncTask;
-import android.text.TextUtils;
+import android.util.JsonReader;
 import android.util.Log;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpCookie;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import androidx.annotation.CallSuper;
 
-public abstract class NetworkManager {
-    String TAG = "NetworkManager";
+public abstract class NetworkManager extends AsyncTask<String, String, JSONObject> {
+    String URLPrefix = "http://106.10.33.149";
     String urlAddress = "";
     JSONObject requestJson, responseJson;
-
-    String URLPrefix = "https://106.10.52.109";
-    private static java.net.CookieManager msCookieManager = new java.net.CookieManager();
-
-    boolean isError = false;
-    int errorCode;
 
     public NetworkManager(String path, JSONObject requestJson) {
         this.urlAddress = URLPrefix + path;
         this.requestJson = requestJson;
     }
 
-    public abstract void responseCallback(JSONObject responseJson);
+    public abstract void responseCallback(JSONObject response);
 
     @CallSuper
     public void errorCallback(int status) {
         //if (BuildConfig.DEBUG) Log.e(TAG, "http status code: " + status);
     }
 
-    public void sendJson() {
-        new AsyncTask<Void,Void,Void>() {
-            @Override
-            protected void onPreExecute()
-            {
-                super.onPreExecute();
-            }
+    @Override
+    protected JSONObject doInBackground(String... urls){
+        try{
+            HttpURLConnection con = null;
+            BufferedReader reader = null;
 
-            @Override
-            protected Void doInBackground(Void... voids) {
-                try {
+            try{
+                URL url = new URL(urlAddress);
+                con = (HttpURLConnection)url.openConnection();
+                con.connect();
 
-                    URL url = new URL(urlAddress);
+                InputStream stream = con.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
 
-                    HttpsURLConnection conn = null;
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+                String response;
 
-                    OutputStream os = null;
-                    InputStream is = null;
-                    ByteArrayOutputStream baos = null;
-
-                    conn = (HttpsURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestProperty("Accept", "application/json");
-                    if(msCookieManager.getCookieStore().getCookies().size() > 0){
-                        conn.setRequestProperty("Cookie",
-                                TextUtils.join(";", msCookieManager.getCookieStore().getCookies()));
-                    }
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setDefaultUseCaches(false);
-
-                    if (requestJson != null) {
-                        os = conn.getOutputStream();
-                        os.write(requestJson.toString().getBytes());
-                        os.flush();
-
-                        //if (BuildConfig.DEBUG) Log.d(TAG, "json byte: "+requestJson.toString().getBytes());
-                    }
-
-                    String response;
-
-                    int responseCode = conn.getResponseCode();
-
-                    if (responseCode == HttpsURLConnection.HTTP_OK) {
-
-                        is = conn.getInputStream();
-
-                        Map<String, List<String>> headerFields = conn.getHeaderFields();
-                        List<String> cookiesHeader = headerFields.get("Set-Cookie");
-                        if(cookiesHeader != null){
-                            for(String cookie : cookiesHeader){
-                                msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
-                            }
-                        }
-
-                        StringBuilder builder = new StringBuilder();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-
-                        String line;
-
-                        while ((line = reader.readLine()) != null) {
-                            builder.append(line + "\n");
-                        }
-
-                        response = builder.toString();
-
-                        //if (BuildConfig.DEBUG) Log.d(TAG, "DATA response = \n" + response);
-
-                        responseJson = new JSONObject(response);
-                    } else {
-                        //if (BuildConfig.DEBUG) Log.d(TAG, "response code(http status code): " + responseCode);
-
-                        isError = true;
-                        //errorCallback(responseCode);
-                        errorCode = responseCode;
-                    }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                    isError = true;
-                    errorCode = -1;
-//                    errorCallback(0);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    isError = true;
-                    errorCode = -2;
-//                    errorCallback(1);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    isError = true;
-                    errorCode = -3;
-//                    errorCallback(2);
+                while((line=reader.readLine()) != null){
+                    buffer.append(line);
                 }
 
-                return null;
-            }
+                response = buffer.toString();
+                responseJson = new JSONObject(response);
+                return responseJson;
 
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                if (!isError)
-                    responseCallback(responseJson);
-                else
-                    //responseCallback(null);
-                    errorCallback(errorCode);
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }finally {
+                if(con != null){
+                    con.disconnect();
+                }
+                try{
+                    if(reader != null){
+                        reader.close();
+                    }
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
-        }.execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject result){
+        super.onPostExecute(result);
+        responseCallback(result);
     }
 }
