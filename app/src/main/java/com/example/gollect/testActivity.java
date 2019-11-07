@@ -52,7 +52,7 @@ public class testActivity extends BaseActivity {
             jsonObject.accumulate("user_id","androidTest");
             jsonObject.accumulate("name", "yun");
 
-            new NetworkManager("/users",jsonObject) {
+            new NetworkManager("/post",jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
