@@ -30,7 +30,6 @@ public abstract class NetworkManager extends AsyncTask<String, String, JSONObjec
 
     @CallSuper
     public void errorCallback(int status) {
-        //if (BuildConfig.DEBUG) Log.e(TAG, "http status code: " + status);
     }
 
     @Override
