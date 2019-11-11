@@ -1,4 +1,4 @@
-package com.example.gollect;
+package com.example.gollect.utility;
 
 import android.app.Notification;
 import android.graphics.drawable.Icon;
@@ -7,8 +7,14 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
+import io.realm.Realm;
+
 public class NotificationListener extends NotificationListenerService {
     public final static String TAG = "NotificationListener";
+
+
+    //앱에 설치된 Realm파일을 찾아서 가져오는 코드
+    Realm realm = Realm.getDefaultInstance();
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {

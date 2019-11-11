@@ -1,0 +1,66 @@
+package com.example.gollect;
+
+import java.util.Date;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class AlarmData extends RealmObject {
+    @PrimaryKey
+    int id;
+    String appName;
+    String contents;
+    Date writeAt;
+
+    public AlarmData() {
+    }
+
+    public AlarmData(int id, String appName) {
+        this.id = id;
+        this.contents = contents;
+    }
+
+    public AlarmData(int id, String appName, String contents){
+        this.id = id;
+        this.appName = appName;
+        this.contents = contents;
+    }
+    public AlarmData(int id, String appName, String contents, Date writeAt) {
+        this.id = id;
+        this.appName = appName;
+        this.contents = contents;
+        this.writeAt = writeAt;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public Date getWriteAt() {
+        return writeAt;
+    }
+
+    public void setWriteAt(Date writeAt) {
+        this.writeAt = writeAt;
+    }
+}
