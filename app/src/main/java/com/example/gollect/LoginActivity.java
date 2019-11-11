@@ -109,7 +109,9 @@ public class LoginActivity extends BaseActivity {
         getUserData().setGoogleName(google_name);
         getUserData().setGoogleID(google_id+"");
 
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
+//        Intent mainActivity = new Intent(this, MainActivity.class);
+//        startActivity(mainActivity);
+        Intent testActivity = new Intent(this, testActivity.class);
+        startActivity(testActivity);
     }
 }
