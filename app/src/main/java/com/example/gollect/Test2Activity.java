@@ -9,7 +9,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.util.Set;
 
-public class TestActivity extends AppCompatActivity {
+public class Test2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
