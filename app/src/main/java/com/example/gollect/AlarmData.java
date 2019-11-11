@@ -9,6 +9,7 @@ public class AlarmData extends RealmObject {
     @PrimaryKey
     int id;
     String appName;
+    String sender;
     String contents;
     Date writeAt;
 
@@ -28,6 +29,14 @@ public class AlarmData extends RealmObject {
     public AlarmData(int id, String appName, String contents, Date writeAt) {
         this.id = id;
         this.appName = appName;
+        this.contents = contents;
+        this.writeAt = writeAt;
+    }
+
+    public AlarmData(int id, String appName, String sender, String contents, Date writeAt) {
+        this.id = id;
+        this.appName = appName;
+        this.sender = sender;
         this.contents = contents;
         this.writeAt = writeAt;
     }

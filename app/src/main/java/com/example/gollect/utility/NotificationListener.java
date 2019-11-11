@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.example.gollect.AlarmData;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.realm.Realm;
@@ -40,7 +42,8 @@ public class NotificationListener extends NotificationListenerService {
         CharSequence subText = extras.getCharSequence(Notification.EXTRA_SUB_TEXT);
         Icon smallIcon = notification.getSmallIcon();
         Icon largeIcon = notification.getLargeIcon();
-
+        String contents;
+        Log.d(TAG, realm.getPath());
         Log.d(TAG, "onNotificationPosted ~ " +
                 " packageName: " + sbn.getPackageName() +
                 " id: " + sbn.getId() +
@@ -49,13 +52,20 @@ public class NotificationListener extends NotificationListenerService {
                 " text : " + text +
                 " subText: " + subText);
 
+        DateFormat df = new SimpleDateFormat("HH:mm:ss"); // HH=24h, hh=12h
+        Date date = new Date(sbn.getPostTime());
+
         //Realm에 객체(데이터) 저장
+
+        if(text != null)
+            addAlarm(sbn.getPackageName(), title, text.toString(), date);
+
     }
 
 
-    private void addAlarm(String appName, String contents, Date date){
+    private void addAlarm(String appName, String sender, String contents, Date date){
         date.setTime(System.currentTimeMillis());
-        final AlarmData AlarmData = new AlarmData(getAlarmDataId(), appName, contents, date);
+        final AlarmData AlarmData = new AlarmData(getAlarmDataId(), appName, sender, contents, date);
 
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
