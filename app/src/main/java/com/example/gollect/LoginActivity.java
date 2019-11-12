@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.se.omapi.Session;
 import android.util.Log;
 import android.view.View;
 
+import com.example.gollect.utility.NetworkManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -18,6 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends BaseActivity {
 
@@ -102,6 +107,7 @@ public class LoginActivity extends BaseActivity {
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN); // go to onActivityResult()
     }
 
+    //회원가입 확인
     public void googleLoginStep1(){
         google_name = loginInfoPreferences.getString("google_name","");
         google_id = loginInfoPreferences.getString("google_id","");
@@ -111,7 +117,64 @@ public class LoginActivity extends BaseActivity {
 
 //        Intent mainActivity = new Intent(this, MainActivity.class);
 //        startActivity(mainActivity);
-        Intent testActivity = new Intent(this, testActivity.class);
-        startActivity(testActivity);
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+    }
+
+    //회원가입
+    public void googleLoginStep2(){
+
+    }
+
+    //로그인
+    public void googleLoginStep3(){
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("user_id","androidTest");
+            jsonObject.accumulate("name", "yun");
+
+            new NetworkManager("/post",jsonObject) {
+                @Override
+                public void errorCallback(int status) {
+                    super.errorCallback(status);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishAffinity();
+                                    System.runFinalization();
+                                    System.exit(0);
+                                    dialog.dismiss();
+                                }
+                            };
+
+                            new android.app.AlertDialog.Builder(LoginActivity.this)
+                                    .setTitle(getString(R.string.network_err_msg))
+                                    .setPositiveButton(getString(R.string.ok), exitListener)
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                    });
+                }
+
+                @Override
+                public void responseCallback(JSONObject responseJson) {
+
+                    try {
+                        Log.d("jaejin11",responseJson.toString());
+                        if (responseJson.getInt("id") == 1) {
+                            Log.d("jaejin11","maerong");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.execute();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 }

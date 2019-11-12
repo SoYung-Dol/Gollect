@@ -9,7 +9,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private static UserData     userData;
 
     public final static boolean DEBUG_LOG                          = true;
-    public static final String Preferences_LOGIN						= "login";
+    public static final String Preferences_LOGIN				    = "login";
     @Override
     public void onClick(View v) {
 

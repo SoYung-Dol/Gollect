@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/more_menu"
+        android:icon="@drawable/ic_more_gollect_light_24dp"
+        android:orderInCategory="2"
+        android:title="more"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/modification"
+                android:title="구독정보 수정" />
+
+            <item
+                android:id="@+id/logout"
+                android:title="로그아웃" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/search_menu"
+        android:icon="@drawable/ic_search_gollect_light_24dp"
+        android:title="search"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/refresh_menu"
+        android:icon="@drawable/ic_autorenew_gollect_light_24dp"
+        android:title="refresh"
+        android:orderInCategory="0"
+        app:showAsAction="always"/>
+</menu>
