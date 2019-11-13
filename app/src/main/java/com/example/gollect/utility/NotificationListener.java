@@ -37,13 +37,16 @@ public class NotificationListener extends NotificationListenerService {
 
         Notification notification = sbn.getNotification();
         Bundle extras = sbn.getNotification().extras;
+        int notificationIcon = extras.getInt(Notification.EXTRA_SMALL_ICON);
         String title = extras.getString(Notification.EXTRA_TITLE);
         CharSequence text = extras.getCharSequence(Notification.EXTRA_TEXT);
         CharSequence subText = extras.getCharSequence(Notification.EXTRA_SUB_TEXT);
         Icon smallIcon = notification.getSmallIcon();
         Icon largeIcon = notification.getLargeIcon();
         String contents;
+
         Log.d(TAG, "onNotificationPosted ~ " +
+                " icon: " + notificationIcon +
                 " packageName: " + sbn.getPackageName() +
                 " notification: " + sbn.getNotification() +
                 " id: " + sbn.getId() +
@@ -57,13 +60,13 @@ public class NotificationListener extends NotificationListenerService {
 
         //Realm에 객체(데이터) 저장
 
-        if(text != null)
-            addAlarm(sbn.getPackageName(), title, text.toString(), date);
+        if(text != null && !sbn.getNotification().toString().contains("quiet_new_message"))
+            addAlarm(sbn.getPackageName(), smallIcon,title, text.toString(), date);
 
     }
 
 
-    private void addAlarm(String appName, String sender, String contents, Date date){
+    private void addAlarm(String appName, Icon smallIcon, String sender, String contents, Date date){
         date.setTime(System.currentTimeMillis());
         final AlarmData AlarmData = new AlarmData(getAlarmDataId(), appName, sender, contents, date);
 

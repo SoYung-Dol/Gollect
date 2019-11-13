@@ -1,5 +1,7 @@
 package com.example.gollect;
 
+import android.graphics.drawable.Icon;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -8,6 +10,7 @@ import io.realm.annotations.PrimaryKey;
 public class AlarmData extends RealmObject {
     @PrimaryKey
     int id;
+    byte[] smallIcon;
     String appName;
     String sender;
     String contents;
@@ -35,6 +38,15 @@ public class AlarmData extends RealmObject {
 
     public AlarmData(int id, String appName, String sender, String contents, Date writeAt) {
         this.id = id;
+        this.appName = appName;
+        this.sender = sender;
+        this.contents = contents;
+        this.writeAt = writeAt;
+    }
+
+    public AlarmData(int id, byte[] smallIcon, String appName, String sender, String contents, Date writeAt) {
+        this.id = id;
+        this.smallIcon = smallIcon;
         this.appName = appName;
         this.sender = sender;
         this.contents = contents;
