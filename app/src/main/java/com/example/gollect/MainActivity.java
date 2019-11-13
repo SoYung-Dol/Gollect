@@ -1,22 +1,35 @@
 package com.example.gollect;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.ListFragment;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.gollect.adapter.TabPagerAdapter;
+import com.example.gollect.adapter.TcListviewAdapter;
+import com.example.gollect.fragment.TextFragment;
+import com.example.gollect.utility.BackPressCloseHandler;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends BaseActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private BackPressCloseHandler backPressCloseHandler;
+    private Toast toast;
+    static final String[] LIST_MENU = {"LIST1", "LIST2", "LIST3"} ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,10 +66,14 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+/*
+        TextFragment textFragment = (TextFragment) getSupportFragmentManager().findFragmentById(R.id.textfragment);
+        textFragment.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground), "NEW","Contents");
+ */
     }
     @Override
     public void onBackPressed(){
-        super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
     }
     @Override
     protected void onResume(){
@@ -74,7 +91,6 @@ public class MainActivity extends BaseActivity {
 
         switch (id){
             case R.id.refresh_menu:
-                Log.d("jaejin","refresh");
                 break;
             case R.id.search_menu:
                 Log.d("jaejin","search");

@@ -1,7 +1,7 @@
 package com.example.gollect;
 
 public class UserData {
-    private String googleID, googleName;
+    private String googleID, googleName, googleEmail;
 
     public void setGoogleID(String googleID){
         this.googleID = googleID;
@@ -15,5 +15,12 @@ public class UserData {
     }
     public String getGoogleName(){
         return this.googleName;
+    }
+
+    public void setGoogleEmail(String googleEmail){
+        this.googleEmail = googleEmail;
+    }
+    public String getGoogleEmail(){
+        return this.googleEmail;
     }
 }

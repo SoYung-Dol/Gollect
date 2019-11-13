@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.gollect.R;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
 public class AlarmFragment extends Fragment {
 

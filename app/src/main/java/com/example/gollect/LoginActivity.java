@@ -12,6 +12,7 @@ import android.se.omapi.Session;
 import android.util.Log;
 import android.view.View;
 
+import com.example.gollect.utility.BackPressCloseHandler;
 import com.example.gollect.utility.NetworkManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,17 +29,19 @@ public class LoginActivity extends BaseActivity {
 
     private static final int GOOGLE_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
-    String TAG = "LoginActivity";
+    private String TAG = "LoginActivity";
     SharedPreferences loginInfoPreferences;
     public boolean first_google_login;
     SignInButton Google_Login;
-    String google_name, google_id;
+    String google_name, google_id, google_email;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         createUserData();
         first_google_login = true;
 
@@ -79,6 +82,7 @@ public class LoginActivity extends BaseActivity {
             editor.putString("google_name", acct.getDisplayName());
             editor.putString("google_id", acct.getId()+"");
             editor.putString("google_profile",acct.getPhotoUrl()+"");
+            editor.putString("google_email",acct.getEmail());
             editor.commit();
 
 //            if(first_google_login) {
@@ -91,6 +95,8 @@ public class LoginActivity extends BaseActivity {
         }
 
     }
+
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -111,29 +117,17 @@ public class LoginActivity extends BaseActivity {
     public void googleLoginStep1(){
         google_name = loginInfoPreferences.getString("google_name","");
         google_id = loginInfoPreferences.getString("google_id","");
+        google_email = loginInfoPreferences.getString("google_email","");
 
         getUserData().setGoogleName(google_name);
         getUserData().setGoogleID(google_id+"");
+        getUserData().setGoogleEmail(google_email);
 
-//        Intent mainActivity = new Intent(this, MainActivity.class);
-//        startActivity(mainActivity);
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
-    }
-
-    //회원가입
-    public void googleLoginStep2(){
-
-    }
-
-    //로그인
-    public void googleLoginStep3(){
         try{
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("user_id","androidTest");
-            jsonObject.accumulate("name", "yun");
+            jsonObject.accumulate("user_hash",google_id);
 
-            new NetworkManager("/post",jsonObject) {
+            new NetworkManager("/users",jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
@@ -164,9 +158,10 @@ public class LoginActivity extends BaseActivity {
                 public void responseCallback(JSONObject responseJson) {
 
                     try {
-                        Log.d("jaejin11",responseJson.toString());
-                        if (responseJson.getInt("id") == 1) {
-                            Log.d("jaejin11","maerong");
+                        if (responseJson.getBoolean("result")) {
+                            googleLoginStep3();
+                        }else{
+                            googleLoginStep2();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -176,5 +171,116 @@ public class LoginActivity extends BaseActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    //회원가입
+    public void googleLoginStep2(){
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("user_hash",google_id);
+            jsonObject.accumulate("user_name",google_name);
+            jsonObject.accumulate("user_email",google_email);
+
+            new NetworkManager("/users/signup",jsonObject) {
+                @Override
+                public void errorCallback(int status) {
+                    super.errorCallback(status);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishAffinity();
+                                    System.runFinalization();
+                                    System.exit(0);
+                                    dialog.dismiss();
+                                }
+                            };
+
+                            new android.app.AlertDialog.Builder(LoginActivity.this)
+                                    .setTitle(getString(R.string.network_err_msg))
+                                    .setPositiveButton(getString(R.string.ok), exitListener)
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                    });
+                }
+
+                @Override
+                public void responseCallback(JSONObject responseJson) {
+
+                    try {
+                        if (responseJson.getBoolean("result")) {
+                            googleLoginStep3();
+                        }else{
+                            Log.d(TAG,"회원가입실패");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.execute();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    //로그인
+    public void googleLoginStep3() {
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("user_hash",google_id);
+
+            new NetworkManager("/users/login",jsonObject) {
+                @Override
+                public void errorCallback(int status) {
+                    super.errorCallback(status);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishAffinity();
+                                    System.runFinalization();
+                                    System.exit(0);
+                                    dialog.dismiss();
+                                }
+                            };
+
+                            new android.app.AlertDialog.Builder(LoginActivity.this)
+                                    .setTitle(getString(R.string.network_err_msg))
+                                    .setPositiveButton(getString(R.string.ok), exitListener)
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                    });
+                }
+
+                @Override
+                public void responseCallback(JSONObject responseJson) {
+
+                    try {
+                        if (responseJson.getBoolean("result")) {
+                            Log.d(TAG,"로그인성공");
+                            loginSuccess();
+                        }else{
+                            Log.d(TAG,"로그인실패");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.execute();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+    public void loginSuccess(){
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
     }
 }
