@@ -60,7 +60,7 @@ public class NotificationListener extends NotificationListenerService {
 
         //Realm에 객체(데이터) 저장
 
-        if(text != null && !sbn.getNotification().toString().contains("quiet_new_message"))
+        if(text != null && !sbn.getNotification().toString().contains("quiet_new_message") && !!sbn.getNotification().toString().contains("step_counter_channel"))
             addAlarm(sbn.getPackageName(), smallIcon,title, text.toString(), date);
 
     }
