@@ -43,9 +43,9 @@ public class NotificationListener extends NotificationListenerService {
         Icon smallIcon = notification.getSmallIcon();
         Icon largeIcon = notification.getLargeIcon();
         String contents;
-        Log.d(TAG, realm.getPath());
         Log.d(TAG, "onNotificationPosted ~ " +
                 " packageName: " + sbn.getPackageName() +
+                " notification: " + sbn.getNotification() +
                 " id: " + sbn.getId() +
                 " postTime: " + sbn.getPostTime() +
                 " title: " + title +
