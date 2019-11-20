@@ -10,7 +10,6 @@ import io.realm.annotations.PrimaryKey;
 public class AlarmData extends RealmObject {
     @PrimaryKey
     int id;
-    byte[] smallIcon;
     String appName;
     String sender;
     String contents;
@@ -44,14 +43,14 @@ public class AlarmData extends RealmObject {
         this.writeAt = writeAt;
     }
 
-    public AlarmData(int id, byte[] smallIcon, String appName, String sender, String contents, Date writeAt) {
-        this.id = id;
-        this.smallIcon = smallIcon;
-        this.appName = appName;
-        this.sender = sender;
-        this.contents = contents;
-        this.writeAt = writeAt;
-    }
+//    public AlarmData(int id, byte[] smallIcon, String appName, String sender, String contents, Date writeAt) {
+//        this.id = id;
+//        this.smallIcon = smallIcon;
+//        this.appName = appName;
+//        this.sender = sender;
+//        this.contents = contents;
+//        this.writeAt = writeAt;
+//    }
 
     public int getId() {
         return id;
@@ -75,6 +74,14 @@ public class AlarmData extends RealmObject {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public Date getWriteAt() {

@@ -1,11 +1,16 @@
 package com.example.gollect.utility;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.gollect.AlarmData;
 
@@ -31,36 +36,43 @@ public class NotificationListener extends NotificationListenerService {
                 " id: " + sbn.getId());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         super.onNotificationPosted(sbn);
 
         Notification notification = sbn.getNotification();
+
         Bundle extras = sbn.getNotification().extras;
         int notificationIcon = extras.getInt(Notification.EXTRA_SMALL_ICON);
         String title = extras.getString(Notification.EXTRA_TITLE);
         CharSequence text = extras.getCharSequence(Notification.EXTRA_TEXT);
         CharSequence subText = extras.getCharSequence(Notification.EXTRA_SUB_TEXT);
+        int id = sbn.getId();
         Icon smallIcon = notification.getSmallIcon();
         Icon largeIcon = notification.getLargeIcon();
-        String contents;
 
         Log.d(TAG, "onNotificationPosted ~ " +
                 " icon: " + notificationIcon +
+                " channel id: " + notification.getChannelId() +
                 " packageName: " + sbn.getPackageName() +
                 " notification: " + sbn.getNotification() +
-                " id: " + sbn.getId() +
+                " id: " + id +
                 " postTime: " + sbn.getPostTime() +
                 " title: " + title +
                 " text : " + text +
                 " subText: " + subText);
+        Log.i(TAG, "@@@@@@@@@@@@@@@@@@@@@" + id);
 
         DateFormat df = new SimpleDateFormat("HH:mm:ss"); // HH=24h, hh=12h
         Date date = new Date(sbn.getPostTime());
 
         //Realm에 객체(데이터) 저장
 
-        if(text != null && !sbn.getNotification().toString().contains("quiet_new_message") && !!sbn.getNotification().toString().contains("step_counter_channel"))
+        if(text.toString().contains("광고"))
+            NotificationListener.this.cancelNotification(sbn.getKey());
+
+        if(text != null && !sbn.getNotification().toString().contains("quiet_new_message") && !sbn.getPackageName().contains("android"))
             addAlarm(sbn.getPackageName(), smallIcon,title, text.toString(), date);
 
     }

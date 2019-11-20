@@ -29,6 +29,7 @@ public class AlarmFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -38,12 +39,11 @@ public class AlarmFragment extends Fragment {
         //전체 Diary 목록을 Realm에 요청해서 받아오는 코드입니다
 
         RealmResults<AlarmData> alarmRealmResults = getAlarmList();
-        Log.d("AF@@@@@@@",alarmRealmResults.toString());
         // 리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<String> nameList = new ArrayList<>();
         ArrayList<String> contentsList = new ArrayList<>();
         for (int i=0; i<alarmRealmResults.size()-1; i++) {
-            nameList.add(String.format("%s", alarmRealmResults.get(i).getAppName())) ;
+            nameList.add(String.format("%s", alarmRealmResults.get(i).getSender())) ;
             contentsList.add(String.format("%s", alarmRealmResults.get(i).getContents())) ;
         }
 
@@ -61,4 +61,6 @@ public class AlarmFragment extends Fragment {
         RealmResults<AlarmData> alarmRealmResults = realm.where(AlarmData.class).findAll();
         return alarmRealmResults;
     }
+
+
 }
