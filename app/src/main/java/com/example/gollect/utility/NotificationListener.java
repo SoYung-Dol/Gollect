@@ -68,9 +68,10 @@ public class NotificationListener extends NotificationListenerService {
         Date date = new Date(sbn.getPostTime());
 
         //Realm에 객체(데이터) 저장
-
-        if(text.toString().contains("광고"))
-            NotificationListener.this.cancelNotification(sbn.getKey());
+        if(text != null) {
+            if (text.toString().contains("광고"))
+                NotificationListener.this.cancelNotification(sbn.getKey());
+        }
 
         if(text != null && !sbn.getNotification().toString().contains("quiet_new_message") && !sbn.getPackageName().contains("android"))
             addAlarm(sbn.getPackageName(), smallIcon,title, text.toString(), date);
