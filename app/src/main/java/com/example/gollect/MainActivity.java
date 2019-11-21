@@ -1,11 +1,16 @@
 package com.example.gollect;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.gollect.adapter.TabPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Set;
 
 public class MainActivity extends BaseActivity {
     private TabLayout tabLayout;
@@ -17,6 +22,12 @@ public class MainActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (!permissionGrantred()) {
+            Intent intent = new Intent(
+                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
 
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("텍스트"));
@@ -47,5 +58,14 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private boolean permissionGrantred() {
+        Set<String> sets = NotificationManagerCompat.getEnabledListenerPackages(this);
+        if (sets != null && sets.contains(getPackageName())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
