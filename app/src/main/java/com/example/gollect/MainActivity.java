@@ -1,7 +1,10 @@
 package com.example.gollect;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +14,8 @@ import android.widget.Toast;
 import com.example.gollect.adapter.TabPagerAdapter;
 import com.example.gollect.utility.BackPressCloseHandler;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Set;
 
 public class MainActivity extends BaseActivity {
     private TabLayout tabLayout;
@@ -23,13 +28,16 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        backPressCloseHandler = new BackPressCloseHandler(this);
-
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_gollect_light_24dp);
+        backPressCloseHandler = new BackPressCloseHandler(this);
+
+        if (!permissionGrantred()) {
+            Intent intent = new Intent(
+                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
 
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("텍스트"));
@@ -61,11 +69,8 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-/*
-        TextFragment textFragment = (TextFragment) getSupportFragmentManager().findFragmentById(R.id.textfragment);
-        textFragment.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground), "NEW","Contents");
- */
     }
+
     @Override
     public void onBackPressed(){
         backPressCloseHandler.onBackPressed();
@@ -92,5 +97,14 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    private boolean permissionGrantred() {
+        Set<String> sets = NotificationManagerCompat.getEnabledListenerPackages(this);
+        if (sets != null && sets.contains(getPackageName())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
