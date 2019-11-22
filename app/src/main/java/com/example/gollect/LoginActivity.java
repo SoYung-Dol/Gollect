@@ -123,6 +123,10 @@ public class LoginActivity extends BaseActivity {
         getUserData().setGoogleID(google_id+"");
         getUserData().setGoogleEmail(google_email);
 
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+
+/*
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("user_hash",google_id);
@@ -171,6 +175,7 @@ public class LoginActivity extends BaseActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
+*/
     }
 
     //회원가입

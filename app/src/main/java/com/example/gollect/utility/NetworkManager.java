@@ -20,7 +20,7 @@ import java.net.URL;
 import androidx.annotation.CallSuper;
 
 public abstract class NetworkManager extends AsyncTask<String, String, JSONObject> {
-    String URLPrefix = "http://106.10.33.149";
+    String URLPrefix = "http://106.10.54.174:8080";
     String urlAddress = "";
     JSONObject requestJson, responseJson;
 

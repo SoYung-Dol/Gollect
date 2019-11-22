@@ -1,19 +1,14 @@
 package com.example.gollect;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.ListFragment;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.gollect.adapter.TabPagerAdapter;
-import com.example.gollect.adapter.TcListviewAdapter;
-import com.example.gollect.fragment.TextFragment;
 import com.example.gollect.utility.BackPressCloseHandler;
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,7 +17,6 @@ public class MainActivity extends BaseActivity {
     private ViewPager viewPager;
     private BackPressCloseHandler backPressCloseHandler;
     private Toast toast;
-    static final String[] LIST_MENU = {"LIST1", "LIST2", "LIST3"} ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +28,15 @@ public class MainActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_gollect_light_24dp);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_gollect_light_24dp);
 
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("텍스트"));
         tabLayout.addTab(tabLayout.newTab().setText("동영상"));
         tabLayout.addTab(tabLayout.newTab().setText("즐겨찾기"));
         tabLayout.addTab(tabLayout.newTab().setText("알림"));
+        tabLayout.addTab(tabLayout.newTab().setText("설정"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         viewPager = (ViewPager)findViewById(R.id.pager);
@@ -94,15 +89,6 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.search_menu:
                 Log.d("jaejin","search");
-                break;
-            case R.id.more_menu:
-                Log.d("jaejin","more");
-                break;
-            case R.id.modification:
-                Log.d("jaejin","first");
-                break;
-            case R.id.logout:
-                Log.d("jaejin","second");
                 break;
         }
         return true;
