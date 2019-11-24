@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -52,10 +53,11 @@ public class TextFragment extends Fragment{
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        getTextContents();
+ //       getTextContents();
 
         return view;
     }
+
     private void getTextContents(){
         new GetNetworkManager("/contents/text/users/"+3) {
             @Override

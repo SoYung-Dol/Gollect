@@ -11,14 +11,14 @@ public class SampleData {
     ArrayList<VideoContentsItem> items = new ArrayList<>();
     public ArrayList<VideoContentsItem> getItems() {
 
-        VideoContentsItem movie1 = new VideoContentsItem("https://i.ytimg.com/vi/KEgC50mX8ho/maxresdefault.jpg",
-                "아이린", "4분", "1분전");
+        VideoContentsItem movie1 = new VideoContentsItem("http://img.tf.co.kr/article/home/2016/02/17/201637941455648532.jpg",
+                "오버워치", "4:30", "11/24");
 
-        VideoContentsItem movie2 = new VideoContentsItem("https://img.insight.co.kr/static/2018/01/26/700/779f9cylfw1j82j39iny.jpg",
-                "전지현", "4분", "1분전");
+        VideoContentsItem movie2 = new VideoContentsItem("https://post-phinf.pstatic.net/MjAxOTA2MjBfMTM0/MDAxNTYwOTk2MjEwNzIw.Q2Vnj5EcjTmU5rQBtucKLhD1Lu_WMiVe2SpAM242UDkg.F1nKAMvNA5Tg65LiwJVKaemxZozJt5Uh0PG0ztRSMjcg.JPEG/01_%EB%B0%B0%EA%B7%B8.jpg?type=w1200",
+                "배틀그라운드", "11:22", "11/23");
 
-        VideoContentsItem movie3 = new VideoContentsItem("http://img1.daumcdn.net/thumb/S414x237/?fname=http%3A%2F%2Fcfile66.uf.daum.net%2Fimage%2F2160B93F576CE6162456B6",
-                "한지민", "4분", "1분전");
+        VideoContentsItem movie3 = new VideoContentsItem("http://www.busan.com/nas/wcms/wcms_data/photos/2019/05/22/2019052210200143511_m.jpg",
+                "롤", "9:11", "11/11");
 
         items.add(movie1);
         items.add(movie2);
