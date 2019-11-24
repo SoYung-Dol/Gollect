@@ -14,6 +14,8 @@ public class AlarmData extends RealmObject {
     String sender;
     String contents;
     Date writeAt;
+    int resId;
+    String resPackage;
 
     public AlarmData() {
     }
@@ -43,14 +45,14 @@ public class AlarmData extends RealmObject {
         this.writeAt = writeAt;
     }
 
-//    public AlarmData(int id, byte[] smallIcon, String appName, String sender, String contents, Date writeAt) {
-//        this.id = id;
-//        this.smallIcon = smallIcon;
-//        this.appName = appName;
-//        this.sender = sender;
-//        this.contents = contents;
-//        this.writeAt = writeAt;
-//    }
+    public AlarmData(int id, String appName, String sender, String contents, Date writeAt, int resId) {
+        this.id = id;
+        this.appName = appName;
+        this.sender = sender;
+        this.contents = contents;
+        this.writeAt = writeAt;
+        this.resId = resId;
+    }
 
     public int getId() {
         return id;
@@ -90,5 +92,13 @@ public class AlarmData extends RealmObject {
 
     public void setWriteAt(Date writeAt) {
         this.writeAt = writeAt;
+    }
+
+    public int getResId() {
+        return resId;
+    }
+
+    public void setResId(int resId) {
+        this.resId = resId;
     }
 }

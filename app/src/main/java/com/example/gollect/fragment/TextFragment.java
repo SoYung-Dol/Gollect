@@ -113,29 +113,30 @@ public class TextFragment extends Fragment{
     private void setContents(JSONObject json){
         try{
             JSONArray jsonArray;
-            jsonArray = new JSONArray(json.getJSONArray("textContents").toString());
-            for(int i = jsonArray.length() - 1 ; i >= 0 ; i--)
-            {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String platformId = jsonObject.getString("platform_id");
-                String title = jsonObject.getString("title");
-                String summary = jsonObject.getString("abstract");
-                String url = jsonObject.getString("url");
-                String imgSrc = jsonObject.getString("img_src");
-                String temp_uploaded_at = jsonObject.getString("uploaded_at");
+            if(json != null) {
+                jsonArray = new JSONArray(json.getJSONArray("textContents").toString());
+                for (int i = jsonArray.length() - 1; i >= 0; i--) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String platformId = jsonObject.getString("platform_id");
+                    String title = jsonObject.getString("title");
+                    String summary = jsonObject.getString("abstract");
+                    String url = jsonObject.getString("url");
+                    String imgSrc = jsonObject.getString("img_src");
+                    String temp_uploaded_at = jsonObject.getString("uploaded_at");
 
-                TextContentsItem item = new TextContentsItem(
-                        platformId,
-                        title,
-                        summary,
-                        url,
-                        imgSrc,
-                        temp_uploaded_at
-                );
-                items.add(item);
+                    TextContentsItem item = new TextContentsItem(
+                            platformId,
+                            title,
+                            summary,
+                            url,
+                            imgSrc,
+                            temp_uploaded_at
+                    );
+                    items.add(item);
+                }
+                adapter = new TcViewAdapter(items, getActivity().getApplicationContext());
+                recyclerView.setAdapter(adapter);
             }
-            adapter = new TcViewAdapter(items, getActivity().getApplicationContext());
-            recyclerView.setAdapter(adapter);
 
         }catch (JSONException e) {
             Log.d("power","ERROR");

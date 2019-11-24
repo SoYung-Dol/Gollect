@@ -61,8 +61,6 @@ public class NotificationListener extends NotificationListenerService {
                 " title: " + title +
                 " text : " + text +
                 " subText: " + subText);
-        Log.i(TAG, "@@@@@@@@@@@@@@@@@@@@@" + id);
-
         DateFormat df = new SimpleDateFormat("HH:mm:ss"); // HH=24h, hh=12h
         Date date = new Date(sbn.getPostTime());
 
@@ -73,14 +71,14 @@ public class NotificationListener extends NotificationListenerService {
         }
 
         if(text != null && !sbn.getNotification().toString().contains("quiet_new_message") && !sbn.getPackageName().contains("android"))
-            addAlarm(sbn.getPackageName(), smallIcon,title, text.toString(), date);
+            addAlarm(sbn.getPackageName(),title, text.toString(), date, notificationIcon);
 
     }
 
 
-    private void addAlarm(String appName, Icon smallIcon, String sender, String contents, Date date){
+    private void addAlarm(String appName, String sender, String contents, Date date, int resid){
         date.setTime(System.currentTimeMillis());
-        final AlarmData AlarmData = new AlarmData(getAlarmDataId(), appName, sender, contents, date);
+        final AlarmData AlarmData = new AlarmData(getAlarmDataId(), appName, sender, contents, date, resid);
 
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
