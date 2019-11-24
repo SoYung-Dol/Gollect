@@ -3,23 +3,53 @@ package com.example.gollect.item;
 import android.graphics.drawable.Drawable;
 
 public class TextContentsItem {
-    private Drawable icon;
+    private String platformId;
     private String title;
-    private String sub_title;
+    private String summary;
+    private String url;
+    private String img_src;
+    private String uploaded_at;
 
-/*
-    public TextContentsItem(Drawable icon, String title, String sub_title) {
-        this.icon = icon;
+
+    public TextContentsItem(String platformId, String title, String summary, String url,String img_src,String uploaded_at) {
+        this.platformId = platformId;
         this.title = title;
-        this.sub_title = sub_title;
-    }
-*/
-    public Drawable getIcon() {
-        return icon;
+        this.summary = summary;
+        this.url = url;
+        this.img_src = img_src;
+        this.uploaded_at = uploaded_at;
     }
 
-    public void setIcon(Drawable icon) {
-        this.icon = icon;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getImg_src() {
+        return img_src;
+    }
+
+    public void setImg_src(String img_src) {
+        this.img_src = img_src;
+    }
+
+    public String getUploaded_at() {
+        return uploaded_at;
+    }
+
+    public void setUploaded_at(String uploaded_at) {
+        this.uploaded_at = uploaded_at;
+    }
+
+    public String getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(String platformId) {
+        this.platformId = platformId;
     }
 
     public String getTitle() {
@@ -30,11 +60,11 @@ public class TextContentsItem {
         this.title = title;
     }
 
-    public String getSub_title() {
-        return sub_title;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setSub_title(String sub_title) {
-        this.sub_title = sub_title;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

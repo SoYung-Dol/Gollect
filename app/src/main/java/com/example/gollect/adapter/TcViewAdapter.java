@@ -1,6 +1,8 @@
 package com.example.gollect.adapter;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +11,26 @@ import android.widget.TextView;
 
 import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
+import com.example.gollect.item.VideoContentsItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHolder> {
 
-    private ArrayList<TextContentsItem> items = new ArrayList<>();
+    private List<TextContentsItem> items;
+    private Context context;
 
+    public TcViewAdapter(List<TextContentsItem> listitems, Context context){
+        this.items = listitems;
+        this.context = context;
+    }
     public class TcViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView image;
+        private TextView image;
         private TextView title;
         private TextView contents;
 
@@ -30,7 +39,6 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
             image = itemView.findViewById(R.id.imageView1);
             title = itemView.findViewById(R.id.textView1);
             contents = itemView.findViewById(R.id.textView2);
-
         }
     }
     @NonNull
@@ -47,23 +55,25 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
     public void onBindViewHolder(@NonNull TcViewAdapter.TcViewHolder holder, int position) {
         TextContentsItem item = items.get(position);
 
-        holder.image.setImageDrawable(item.getIcon());
+        holder.image.setText(item.getPlatformId());
         holder.title.setText(item.getTitle());
-        holder.contents.setText(item.getSub_title());
+        holder.contents.setText(item.getSummary());
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-    public void addItem(Drawable icon, String title, String desc) {
+/*
+    public void addItem(String platformId, String title, String summary) {
         TextContentsItem item = new TextContentsItem();
 
-        item.setIcon(icon);
+        item.setPlatformId(platformId);
         item.setTitle(title);
-        item.setSub_title(desc);
+        item.setSummary(summary);
 
         items.add(item);
     }
+
+ */
 }
