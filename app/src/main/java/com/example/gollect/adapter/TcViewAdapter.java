@@ -2,7 +2,6 @@ package com.example.gollect.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +14,11 @@ import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +27,9 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
 
     private List<TextContentsItem> items;
     private Context context;
-
+    private Date date;
+    private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private String getTime;
     public TcViewAdapter(List<TextContentsItem> listitems, Context context){
         this.items = listitems;
         this.context = context;
@@ -70,10 +74,19 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
     public void onBindViewHolder(@NonNull TcViewAdapter.TcViewHolder holder, int position) {
         TextContentsItem item = items.get(position);
 
+        long now = System.currentTimeMillis();
+        date = new Date(now);
+        getTime = simpleDateFormat.format(date);
+
+        String date = item.getUploaded_at().substring(5,10);
+        String time = item.getUploaded_at().substring(11,16);
+        String currentDate = getTime.substring(5,10);
+
         holder.image.setText(item.getPlatformId());
         holder.title.setText(item.getTitle());
         holder.summary.setText(item.getSummary());
-        holder.upload_time.setText(item.getUploaded_at());
+        if(date == currentDate) holder.upload_time.setText(time);
+        else holder.upload_time.setText(date);
     }
 
     @Override

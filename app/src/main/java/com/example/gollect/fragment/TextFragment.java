@@ -114,7 +114,7 @@ public class TextFragment extends Fragment{
         try{
             JSONArray jsonArray;
             jsonArray = new JSONArray(json.getJSONArray("textContents").toString());
-            for(int i = 0; i < jsonArray.length() ; i++)
+            for(int i = jsonArray.length() - 1 ; i >= 0 ; i--)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String platformId = jsonObject.getString("platform_id");
@@ -122,7 +122,7 @@ public class TextFragment extends Fragment{
                 String summary = jsonObject.getString("abstract");
                 String url = jsonObject.getString("url");
                 String imgSrc = jsonObject.getString("img_src");
-                String uploaded_at = jsonObject.getString("uploaded_at");
+                String temp_uploaded_at = jsonObject.getString("uploaded_at");
 
                 TextContentsItem item = new TextContentsItem(
                         platformId,
@@ -130,7 +130,7 @@ public class TextFragment extends Fragment{
                         summary,
                         url,
                         imgSrc,
-                        uploaded_at
+                        temp_uploaded_at
                 );
                 items.add(item);
             }
