@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -30,7 +31,6 @@ import java.util.List;
 
 public class TextFragment extends Fragment{
 
-    private String TAG = "TextFragment";
     private TcViewAdapter adapter;
     private List<TextContentsItem> items;
     RecyclerView recyclerView;
@@ -54,30 +54,12 @@ public class TextFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         getTextContents();
-/*
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-*/
+
         return view;
     }
+
     private void getTextContents(){
-        new GetNetworkManager("/contents/text/users/"+3) {
+        new GetNetworkManager("/contents/text/users/"+26) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
@@ -139,7 +121,6 @@ public class TextFragment extends Fragment{
             }
 
         }catch (JSONException e) {
-            Log.d("power","ERROR");
             e.printStackTrace();
         }
     }

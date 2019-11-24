@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
@@ -36,17 +37,19 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
     }
     public class TcViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView image;
+        private TextView platform;
         private TextView title;
         private TextView summary;
         private TextView upload_time;
+        private ImageView imageView;
 
         public TcViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.platform);
+            platform = itemView.findViewById(R.id.platform);
             title = itemView.findViewById(R.id.title);
             summary = itemView.findViewById(R.id.summary);
             upload_time = itemView.findViewById(R.id.uploaded_time);
+            imageView = itemView.findViewById(R.id.imageSrc);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -55,7 +58,7 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
                     TextContentsItem textContentsitem = items.get(position);
                     String url = textContentsitem.getUrl();
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    context.startActivity(intent);
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
         }
@@ -82,27 +85,19 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
         String time = item.getUploaded_at().substring(11,16);
         String currentDate = getTime.substring(5,10);
 
-        holder.image.setText(item.getPlatformId());
+        holder.platform.setText(item.getPlatformId());
         holder.title.setText(item.getTitle());
         holder.summary.setText(item.getSummary());
         if(date == currentDate) holder.upload_time.setText(time);
         else holder.upload_time.setText(date);
+
+        Glide.with(holder.itemView.getContext())
+                .load(item.getImg_src())
+                .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-/*
-    public void addItem(String platformId, String title, String summary) {
-        TextContentsItem item = new TextContentsItem();
-
-        item.setPlatformId(platformId);
-        item.setTitle(title);
-        item.setSummary(summary);
-
-        items.add(item);
-    }
-
- */
 }
