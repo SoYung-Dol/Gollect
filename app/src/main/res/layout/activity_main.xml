@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorBeige"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <com.google.android.material.tabs.TabLayout
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:tabSelectedTextColor="#FF7F00"
+        app:tabSelectedTextColor="@color/gollectLight"
         app:tabTextColor="#000000"
-        app:tabIndicatorColor="#FF0000"
+        app:tabIndicatorColor="@color/gollectLight"
         app:tabBackground="@color/colorBeige"/>
 
     <androidx.viewpager.widget.ViewPager

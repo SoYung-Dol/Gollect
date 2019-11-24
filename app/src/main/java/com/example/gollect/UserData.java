@@ -1,19 +1,33 @@
 package com.example.gollect;
 
 public class UserData {
-    private String googleID, googleName;
+    private String userID, userName, userEmail, userHash;
 
-    public void setGoogleID(String googleID){
-        this.googleID = googleID;
+    public void setUserID(String userID){
+        this.userID = userID;
     }
-    public String getGoogleID(){
-        return this.googleID;
+    public String getUserID(){
+        return this.userID;
     }
 
-    public void setGoogleName(String googleName){
-        this.googleName = googleName;
+    public void setUserName(String userName){
+        this.userName = userName;
     }
-    public String getGoogleName(){
-        return this.googleName;
+    public String getUserName(){
+        return this.userName;
+    }
+
+    public void setUserEmail(String userEmail){
+        this.userEmail = userEmail;
+    }
+    public String getUserEmail(){
+        return this.userEmail;
+    }
+
+    public void setUserHash(String userHash){
+        this.userHash = userHash;
+    }
+    public String getUserHash(){
+        return this.userHash;
     }
 }

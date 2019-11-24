@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:actionOverflowButtonStyle">@style/AppTheme.OverFlow</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -13,4 +15,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorBlack</item>
+    </style>
 </resources>

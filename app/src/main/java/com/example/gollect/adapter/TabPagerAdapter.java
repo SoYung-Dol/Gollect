@@ -2,6 +2,7 @@ package com.example.gollect.adapter;
 
 import com.example.gollect.fragment.AlarmFragment;
 import com.example.gollect.fragment.BookmarkFragment;
+import com.example.gollect.fragment.SettingFragment;
 import com.example.gollect.fragment.TextFragment;
 import com.example.gollect.fragment.VideoFragment;
 
@@ -32,6 +33,9 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
             case 3:
                 AlarmFragment alarmFragment = new AlarmFragment();
                 return alarmFragment;
+            case 4:
+                SettingFragment settingFragment = new SettingFragment();
+                return settingFragment;
             default:
                 return null;
         }

@@ -19,12 +19,12 @@ import java.net.URL;
 
 import androidx.annotation.CallSuper;
 
-public abstract class NetworkManager extends AsyncTask<String, String, JSONObject> {
-    String URLPrefix = "http://106.10.33.149";
+public abstract class PostNetworkManager extends AsyncTask<String, String, JSONObject> {
+    String URLPrefix = "http://106.10.54.174:8080";
     String urlAddress = "";
     JSONObject requestJson, responseJson;
 
-    public NetworkManager(String path, JSONObject requestJson) {
+    public PostNetworkManager(String path, JSONObject requestJson) {
         this.urlAddress = URLPrefix + path;
         this.requestJson = requestJson;
     }
@@ -44,7 +44,6 @@ public abstract class NetworkManager extends AsyncTask<String, String, JSONObjec
             try{
                 URL url = new URL(urlAddress);
                 con = (HttpURLConnection)url.openConnection();
-//                con.connect();
 
                 con.setRequestMethod("POST");//POST방식으로 보냄
                 con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정

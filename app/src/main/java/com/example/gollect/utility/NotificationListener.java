@@ -23,7 +23,6 @@ import io.realm.Realm;
 public class NotificationListener extends NotificationListenerService {
     public final static String TAG = "NotificationListener";
 
-
     //앱에 설치된 Realm파일을 찾아서 가져오는 코드
     Realm realm = Realm.getDefaultInstance();
 
