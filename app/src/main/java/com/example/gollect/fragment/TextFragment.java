@@ -53,13 +53,13 @@ public class TextFragment extends Fragment{
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
- //       getTextContents();
+        getTextContents();
 
         return view;
     }
 
     private void getTextContents(){
-        new GetNetworkManager("/contents/text/users/"+3) {
+        new GetNetworkManager("/contents/text/users/"+26) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

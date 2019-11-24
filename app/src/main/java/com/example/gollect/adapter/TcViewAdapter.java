@@ -94,8 +94,6 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
         Glide.with(holder.itemView.getContext())
                 .load(item.getImg_src())
                 .into(holder.imageView);
-
-
     }
 
     @Override
