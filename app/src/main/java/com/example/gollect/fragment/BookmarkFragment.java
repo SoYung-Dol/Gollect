@@ -42,8 +42,8 @@ public class BookmarkFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+/*
 
-
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_launcher_foreground), "title1","contents1");
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_launcher_foreground), "title2","contents2");
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_launcher_foreground), "title3","contents3");
@@ -62,7 +62,7 @@ public class BookmarkFragment extends Fragment {
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_launcher_foreground), "title1","contents1");
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_launcher_foreground), "title2","contents2");
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_launcher_foreground), "title3","contents3");
-
+*/
         return view;
     }
 }

@@ -90,8 +90,6 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.refresh_menu:
-                break;
             case R.id.search_menu:
                 Log.d("jaejin","search");
                 break;

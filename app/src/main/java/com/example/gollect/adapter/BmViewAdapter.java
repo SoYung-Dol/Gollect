@@ -21,15 +21,15 @@ public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHol
 
     public class BmViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView image;
+        private TextView image;
         private TextView title;
         private TextView contents;
 
         public BmViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.imageView1);
-            title = itemView.findViewById(R.id.textView1);
-            contents = itemView.findViewById(R.id.textView2);
+            image = itemView.findViewById(R.id.platform);
+            title = itemView.findViewById(R.id.title);
+            contents = itemView.findViewById(R.id.summary);
 
         }
     }
@@ -47,23 +47,25 @@ public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHol
     public void onBindViewHolder(@NonNull BmViewAdapter.BmViewHolder holder, int position) {
         TextContentsItem item = items.get(position);
 
-        holder.image.setImageDrawable(item.getIcon());
+        holder.image.setText(item.getPlatformId());
         holder.title.setText(item.getTitle());
-        holder.contents.setText(item.getSub_title());
+        holder.contents.setText(item.getSummary());
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-    public void addItem(Drawable icon, String title, String desc) {
+/*
+    public void addItem(String platformId, String title, String desc) {
         TextContentsItem item = new TextContentsItem();
 
-        item.setIcon(icon);
+        item.setPlatformId(platformId);
         item.setTitle(title);
-        item.setSub_title(desc);
+        item.setSummary(desc);
 
         items.add(item);
     }
+
+ */
 }
