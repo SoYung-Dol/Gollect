@@ -27,9 +27,9 @@ public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHol
 
         public BmViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.imageView1);
-            title = itemView.findViewById(R.id.textView1);
-            contents = itemView.findViewById(R.id.textView2);
+            image = itemView.findViewById(R.id.platform);
+            title = itemView.findViewById(R.id.title);
+            contents = itemView.findViewById(R.id.summary);
 
         }
     }

@@ -1,7 +1,9 @@
 package com.example.gollect.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +34,26 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
 
         private TextView image;
         private TextView title;
-        private TextView contents;
+        private TextView summary;
+        private TextView upload_time;
 
         public TcViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.imageView1);
-            title = itemView.findViewById(R.id.textView1);
-            contents = itemView.findViewById(R.id.textView2);
+            image = itemView.findViewById(R.id.platform);
+            title = itemView.findViewById(R.id.title);
+            summary = itemView.findViewById(R.id.summary);
+            upload_time = itemView.findViewById(R.id.uploaded_time);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    int position = getAdapterPosition();
+                    TextContentsItem textContentsitem = items.get(position);
+                    String url = textContentsitem.getUrl();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
     @NonNull
@@ -57,7 +72,8 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
 
         holder.image.setText(item.getPlatformId());
         holder.title.setText(item.getTitle());
-        holder.contents.setText(item.getSummary());
+        holder.summary.setText(item.getSummary());
+        holder.upload_time.setText(item.getUploaded_at());
     }
 
     @Override
