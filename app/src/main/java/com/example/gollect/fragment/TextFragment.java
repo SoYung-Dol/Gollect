@@ -30,7 +30,6 @@ import java.util.List;
 
 public class TextFragment extends Fragment{
 
-    private String TAG = "TextFragment";
     private TcViewAdapter adapter;
     private List<TextContentsItem> items;
     RecyclerView recyclerView;
@@ -54,26 +53,7 @@ public class TextFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         getTextContents();
-/*
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title1", "contents1");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title2", "contents2");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_foreground), "title3", "contents3");
-*/
+
         return view;
     }
     private void getTextContents(){
@@ -138,7 +118,6 @@ public class TextFragment extends Fragment{
             recyclerView.setAdapter(adapter);
 
         }catch (JSONException e) {
-            Log.d("power","ERROR");
             e.printStackTrace();
         }
     }

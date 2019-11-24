@@ -55,7 +55,7 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
                     TextContentsItem textContentsitem = items.get(position);
                     String url = textContentsitem.getUrl();
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    context.startActivity(intent);
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
         }
