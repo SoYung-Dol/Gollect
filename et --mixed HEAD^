@@ -1,0 +1,308 @@
+[33mcommit 63a122b7446bda2a5f84f69849863dadd7b4145e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 25 05:35:51 2019 +0900
+
+    구독 관리 페이지 다이얼로그 생성까지 완료, 추후 키워드 ReplacementSpan으로 바꾸어야함
+
+[33mcommit 5d66821f67efcd503c6ea73f2c1d4695d4ff9395[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mDawoon[m[33m)[m
+Merge: 2a5b085 a60328e
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Sun Nov 24 15:45:22 2019 +0900
+
+    Merge branch 'master' of https://github.com/SoYung-Dol/Gollect
+
+[33mcommit 2a5b0858f1762c557782a62f4a3814f90d16eead[m[33m ([m[1;31morigin/Dawoon[m[33m)[m
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Sun Nov 24 15:38:46 2019 +0900
+
+    Make subscribeActivity
+
+[33mcommit a60328e86f82e4e67dad4cf0b0af893fffd13ac8[m
+Merge: c18341d e7d565d
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Sun Nov 24 15:31:03 2019 +0900
+
+    Merge branch 'jaejin' of https://github.com/SoYung-Dol/Gollect
+    
+    # Conflicts:
+    #       app/src/main/AndroidManifest.xml
+
+[33mcommit e7d565daa8342c69cf935abd5f973b4ae6d03878[m[33m ([m[1;31morigin/jaejin[m[33m)[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Sun Nov 24 14:18:10 2019 +0900
+
+    텍스트 컨텐츠 업로드 시간 보여주는 기능 구현완료
+
+[33mcommit 839f4728602e329d63bc7ec5859226385d4c6645[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Sun Nov 24 13:14:58 2019 +0900
+
+    텍스트 컨텐츠 클릭시 해당 url을 이용하여 웹뷰 띄우도록 구현
+
+[33mcommit d4593deba31f8c60714643e122592d77accf84ba[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Sun Nov 24 12:38:53 2019 +0900
+
+    서버로부터 텍스트 컨텐츠 받아오기 완료
+
+[33mcommit 639a5a11338e422e9272826f099d24c7bc31ab04[m
+Merge: 8ddf733 4b4682e
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Sun Nov 24 00:33:12 2019 +0900
+
+    Merge branch 'Dawoon' of https://github.com/SoYung-Dol/Gollect into Dawoon
+
+[33mcommit 4b4682e4309f93f12223da827d42756d378034a6[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Sun Nov 24 00:30:55 2019 +0900
+
+    플랫폼 구독 진행중
+
+[33mcommit c18341dd1a1bc26eaa338ba3bbc44193d968419a[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Fri Nov 22 15:27:16 2019 +0900
+
+    Merge branch 'master' of https://github.com/SoYung-Dol/Gollect into jaejin
+    
+    # Conflicts:
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/example/gollect/MainActivity.java
+    #       app/src/main/java/com/example/gollect/fragment/AlarmFragment.java
+
+[33mcommit 1b884a5d5b5309d21ae313afcff97af8a4439729[m
+Merge: 29f3d30 8ddf733
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Fri Nov 22 15:10:23 2019 +0900
+
+    Merge branch 'master' of https://github.com/SoYung-Dol/Gollect into jaejin
+    
+    # Conflicts:
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/example/gollect/MainActivity.java
+    #       app/src/main/java/com/example/gollect/fragment/AlarmFragment.java
+
+[33mcommit 29f3d3082ef2b085d7d10e6b1f0b8eff9e536761[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Fri Nov 22 14:21:13 2019 +0900
+
+    text, video, bookmark fragment 틀 구현 및 임시 데이터 저장, 설정 fragment 추가
+
+[33mcommit 8ddf733e8f166502e9a5dcaea25aa7d5788faca1[m
+Merge: e160e08 cb18506
+Author: rhdrlvnd <40141212+rhdrlvnd@users.noreply.github.com>
+Date:   Thu Nov 21 19:03:14 2019 +0900
+
+    Merge pull request #1 from SoYung-Dol/Dawoon
+    
+    Dawoon
+
+[33mcommit cb185060b1e57d12cdc168b6ff06ee52beb2e696[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Thu Nov 21 19:01:45 2019 +0900
+
+    광고 키워드 필터링
+
+[33mcommit 32808545eed2d084a21d379a112d8eb9d5a3692f[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Wed Nov 20 12:34:04 2019 +0900
+
+    알림 키워드로 필터링 기능 추가
+
+[33mcommit e160e085cfa7eaab021a4e14c815493cb8f6fa36[m
+Author: Hwangjaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 14 17:17:49 2019 +0900
+
+    Delete android.yml
+
+[33mcommit 822d3a7718ca847f4e4a2a8a9e2cffb3d9d08bc3[m
+Author: Hwangjaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 14 17:16:15 2019 +0900
+
+    Update android.yml
+
+[33mcommit ed9872e5d3c37f889c39094b58fd0806ba5feb3a[m
+Author: Hwangjaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 14 17:12:50 2019 +0900
+
+    Update android.yml
+
+[33mcommit 96e407386cb34ede9abf70a4bd994a0236cbc5a0[m
+Author: Hwangjaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 14 17:08:47 2019 +0900
+
+    Update android.yml
+
+[33mcommit 98bc6ac67b9f9d1db7fae494ac44eace7d97d94c[m
+Author: Hwangjaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 14 16:52:42 2019 +0900
+
+    Create android.yml
+
+[33mcommit 5af5c739bb787005551d27b3b794d00a57b2a1c2[m
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Thu Nov 14 07:25:33 2019 +0900
+
+    contents 조건 추가
+
+[33mcommit 6acd848d52b684b213792ea0b68035892899b237[m
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Thu Nov 14 06:39:38 2019 +0900
+
+    리사이클러뷰에 App name, contents 업데이트 및 App logo 초안 업데이트
+
+[33mcommit 0bd0a375a66b3f50d91e0320e9124bfee695ba06[m
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Thu Nov 14 03:39:00 2019 +0900
+
+    update recyclerview
+
+[33mcommit 8003d6a86180dedecc98a560572312bad99cbbbd[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Wed Nov 13 23:20:45 2019 +0900
+
+    로그인 및 회원가입 서버와 연동완료, textfragment에 custom listview 구현
+
+[33mcommit fa15c206d33081a7f8a607b534c1a2767c893e70[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Tue Nov 12 11:58:14 2019 +0900
+
+    jaejin branch first push
+
+[33mcommit 03f7ba04c2c85cfdf66df60e6fd359ee933cb0a1[m
+Author: Dawoon <rhdrlvnd@ajou.ac.kr>
+Date:   Tue Nov 12 04:15:58 2019 +0900
+
+    알림 오면 로컬 DB 저장 기능 구현
+
+[33mcommit 58181e8479ef500ecd54245400b40891f45f137b[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 20:48:58 2019 +0900
+
+    알람이 올 때 db에 추가
+
+[33mcommit 4815c07edca0e6dc4c3ce4ac3603214d12829069[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 20:25:18 2019 +0900
+
+    Add Realm database
+
+[33mcommit a50956c049d2a9ae708ccdbde6d3e49fd996363d[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 20:00:53 2019 +0900
+
+    Update alarm item
+
+[33mcommit 818a2b550299052c4aa4035b0ecfa45cc8d7b759[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 19:23:28 2019 +0900
+
+    Update Manifest
+
+[33mcommit 39f90e7094d18e08867cba6ab21b065f0315c6f0[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 19:16:38 2019 +0900
+
+    Add Test2Activity
+
+[33mcommit cd083077bb0e87d82f85734088c33b1c07eeca53[m
+Merge: 731daf2 9f0c9e0
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 19:07:26 2019 +0900
+
+    update
+
+[33mcommit 731daf253c8ff8cf77356643df47daa330f1999e[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Nov 11 18:49:58 2019 +0900
+
+    Add Notification Listener
+
+[33mcommit 9f0c9e0eeac4c18773501df64cd0f0968db3fbc5[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 7 22:20:20 2019 +0900
+
+    서버에 JSON데이터 POST 방식으로 보내는 기능 추가구현
+
+[33mcommit 3fe67695f092330eb5370023ef910341653b9bae[m
+Author: jaejin <jaejin94@ajou.ac.kr>
+Date:   Thu Nov 7 20:58:14 2019 +0900
+
+    안드로이드 버전9 이상에서도 http통신 가능하도록 변경
+
+[33mcommit eb168d0380e157f4ebcd713494555443fdd5a59a[m
+Author: jaejin94 <jaejin94@lumidiet.com>
+Date:   Wed Nov 6 22:42:23 2019 +0900
+
+    서버랑 통신하는 class(NetworkManager) 독립시킴. GET 통신까지 완료
+
+[33mcommit 77f5a96fc64d36941477ddce13a31ee8a3e851fe[m
+Author: jaejin94 <jaejin94@lumidiet.com>
+Date:   Tue Nov 5 21:47:25 2019 +0900
+
+    MainActivity tablayout + viewpager 구현
+
+[33mcommit e3e21b66a85adf716f97de7fcd26369dfda3c38b[m
+Author: jaejin94 <jaejin94@lumidiet.com>
+Date:   Tue Oct 1 16:56:53 2019 +0900
+
+    test
+
+[33mcommit ecda3583457b4ec51cb5e5c77d356c4f4eb92b2b[m
+Author: jaejin94 <jaejin94@lumidiet.com>
+Date:   Tue Oct 1 14:04:36 2019 +0900
+
+    test
+
+[33mcommit 89177fb4725622df94019c4d9f0043adedb16ca5[m
+Author: jaejin94 <jaejin94@lumidiet.com>
+Date:   Tue Oct 1 13:56:31 2019 +0900
+
+    구글로그인 연동완료
+
+[33mcommit 30467f2d004d376d2c404b8b252ed61aeaafbd1c[m
+Author: jaejin94 <jaejin94@lumidiet.com>
+Date:   Mon Sep 16 20:17:44 2019 +0900
+
+    jaejin test
+
+[33mcommit 1a2e0245459ac2b1ae665b6817f780e28b912422[m
+Author: DAWOON <rhdrlvnd@ajou.ac.kr>
+Date:   Mon Sep 16 19:27:54 2019 +0900
+
+    android intial
+
+[33mcommit 55b990c982485ac6cb76f41325af27b76e1d81ca[m
+Author: ChoeJiwon <jiwon0929@ajou.ac.kr>
+Date:   Mon Sep 9 20:56:30 2019 +0900
+
+    Update README.md
+
+[33mcommit cbc129cac3a9e1a36e4ec7bcbc82851c82ceedc0[m
+Author: ChoeJiwon <jiwon0929@ajou.ac.kr>
+Date:   Mon Sep 9 20:52:26 2019 +0900
+
+    Update README.md
+
+[33mcommit 1bf4e750fca49c1fbfac6434de7863b079fc54c3[m
+Author: ChoeJiwon <jiwon0929@ajou.ac.kr>
+Date:   Mon Sep 9 20:47:10 2019 +0900
+
+    Update README.md
+
+[33mcommit b58f7b09dc6332e5bdbf0191ae3f7a45bc556899[m
+Author: ChoeJiwon <jiwon0929@ajou.ac.kr>
+Date:   Mon Sep 9 20:42:29 2019 +0900
+
+    Update README.md
+
+[33mcommit 18a5584ad74177e43dc6c50c47a9d761f6374d9f[m
+Author: rhdrlvnd <40141212+rhdrlvnd@users.noreply.github.com>
+Date:   Mon Sep 9 20:22:50 2019 +0900
+
+    Update README.md
+
+[33mcommit ffe258d3d8a4d5d23afd8441dfd566bb37488bf1[m
+Author: Hwangjaejin <jaejin94@ajou.ac.kr>
+Date:   Mon Sep 9 20:07:07 2019 +0900
+
+    Initial commit

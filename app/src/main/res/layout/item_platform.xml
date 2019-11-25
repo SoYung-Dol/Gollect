@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,22 +10,49 @@
         android:id="@+id/platform_logo"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/platform_name"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="90dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/platform_logo"
+        android:layout_marginBottom="5dp"
         android:gravity="center_vertical"
-        android:text="TextView" />
+        android:text="플랫폼 이름"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/keywordBt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/keywordBt"
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
-        android:layout_toRightOf="@id/platform_name"
-        android:text="Button" />
-</RelativeLayout>
+        android:layout_marginEnd="5dp"
+        android:text="키워드 설정"
+        android:textSize="7dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/subscribeBt"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/subscribeBt"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:text="구독"
+        android:textSize="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

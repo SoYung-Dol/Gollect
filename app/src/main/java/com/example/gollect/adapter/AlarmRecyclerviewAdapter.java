@@ -3,6 +3,7 @@ package com.example.gollect.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Icon;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,15 @@ import com.example.gollect.AlarmData;
 import com.example.gollect.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AlarmRecyclerviewAdapter extends RecyclerView.Adapter<AlarmRecyclerviewAdapter.ViewHolder> {
 
     private ArrayList<String> nameData = null ;
     private ArrayList<String> contentsData = null ;
+    private ArrayList<Integer> residData = null ;
+    private ArrayList<String> respackageData = null ;
+    private ArrayList<String> dateData = null;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,9 +45,12 @@ public class AlarmRecyclerviewAdapter extends RecyclerView.Adapter<AlarmRecycler
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public AlarmRecyclerviewAdapter(ArrayList<String> nameList, ArrayList<String> contentsList) {
+    public AlarmRecyclerviewAdapter(ArrayList<String> nameList, ArrayList<String> contentsList, ArrayList<Integer> resIdList, ArrayList<String> resPackageList, ArrayList<String> dateList) {
         nameData = nameList;
         contentsData = contentsList;
+        residData = resIdList;
+        respackageData = resPackageList;
+        dateData = dateList;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
@@ -63,10 +71,16 @@ public class AlarmRecyclerviewAdapter extends RecyclerView.Adapter<AlarmRecycler
     public void onBindViewHolder(AlarmRecyclerviewAdapter.ViewHolder holder, int position) {
         String appName = nameData.get(position) ;
         String contents = contentsData.get(position);
+        String resPackage = respackageData.get(position);
+        String date = dateData.get(position);
+        int resId = residData.get(position);
+
         Icon icon = null;
         holder.appName.setText(appName) ;
         holder.contents.setText(contents);
-        holder.appIcon.setImageIcon(icon.createWithResource("com.kakao.talk", 2131233882));
+        holder.time.setText(date);
+        Log.d("ICON",resPackage + " " +resId);
+        holder.appIcon.setImageIcon(icon.createWithResource(resPackage, resId));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

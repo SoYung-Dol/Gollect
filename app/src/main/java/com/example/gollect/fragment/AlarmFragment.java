@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -42,16 +43,30 @@ public class AlarmFragment extends Fragment {
         // 리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<String> nameList = new ArrayList<>();
         ArrayList<String> contentsList = new ArrayList<>();
+        ArrayList<Integer> residList = new ArrayList<>();
+        ArrayList<String> respackagerList = new ArrayList<>();
+        ArrayList<String> dateList = new ArrayList<>();
         for (int i=0; i<alarmRealmResults.size()-1; i++) {
-            nameList.add(String.format("%s", alarmRealmResults.get(i).getSender())) ;
-            contentsList.add(String.format("%s", alarmRealmResults.get(i).getContents())) ;
-        }
+            nameList.add(String.format("%s", alarmRealmResults.get(i).getSender()));
+            contentsList.add(String.format("%s", alarmRealmResults.get(i).getContents()));
 
-        RecyclerView recyclerView = v.findViewById(R.id.rv_alarm) ;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext())) ;
+            SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            String date = transFormat.format(alarmRealmResults.get(i).getWriteAt());
+            dateList.add(String.format("%s",date));
+            residList.add(alarmRealmResults.get(i).getResId());
+            respackagerList.add(String.format("%s",alarmRealmResults.get(i).getAppName()));
+        }
+        Log.d("@@@@@@",alarmRealmResults.toString());
+
+        RecyclerView recyclerView = v.findViewById(R.id.rv_alarm);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(mLayoutManager) ;
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        AlarmRecyclerviewAdapter adapter = new AlarmRecyclerviewAdapter(nameList, contentsList) ;
+        AlarmRecyclerviewAdapter adapter = new AlarmRecyclerviewAdapter(nameList, contentsList, residList, respackagerList, dateList) ;
         recyclerView.setAdapter(adapter) ;
         return v;
     }
