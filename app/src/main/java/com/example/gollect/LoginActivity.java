@@ -120,6 +120,10 @@ public class LoginActivity extends BaseActivity {
 
         Intent mainActivity = new Intent(this, MainActivity.class);
         startActivity(mainActivity);
+ /*
+        Intent SubscribeActivity = new Intent(this, SubscibeActivity.class);
+        startActivity(SubscribeActivity);
+ */
 /*
         try{
             JSONObject jsonObject = new JSONObject();

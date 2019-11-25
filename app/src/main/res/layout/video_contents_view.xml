@@ -41,22 +41,19 @@
                     android:textColor="@android:color/black"
                     android:textSize="18dp"/>
 
-
                 <TextView
                     android:id="@+id/video_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="Movie Genre"
-                    android:textColor="@android:color/black"
                     android:textSize="12dp"/>
 
                 <TextView
                     android:id="@+id/video_uploaded_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Movie Content"
-                    android:textColor="@android:color/black"/>
+                    android:text="Movie Content"/>
             </LinearLayout>
 
         </LinearLayout>
