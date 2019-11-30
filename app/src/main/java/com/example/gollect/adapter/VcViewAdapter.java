@@ -18,7 +18,9 @@ import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,9 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
 
     private List<VideoContentsItem> items;
     private Context context;
+    private Date date;
+    private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+    private String getTime;
 
     public VcViewAdapter(List<VideoContentsItem> listitems, Context context){
         this.items = listitems;
@@ -44,8 +49,16 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(VcViewAdapter.ViewHolder viewHolder, int position) {
-
         VideoContentsItem item = items.get(position);
+
+        long now = System.currentTimeMillis();
+        date = new Date(now);
+        getTime = simpleDateFormat.format(date);
+
+        String month = item.getUploaded_at().substring(5,7);
+        String day = item.getUploaded_at().substring(8,10);
+
+        String currentDate = month+"/"+day;
 
         Glide.with(viewHolder.itemView.getContext())
                 .load(item.getUrl())
@@ -53,7 +66,7 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
 
         viewHolder.video_title.setText(item.getTitle());
         viewHolder.video_duration.setText(item.getDuration());
-        viewHolder.video_uploaded_at.setText(item.getUploaded_at());
+        viewHolder.video_uploaded_at.setText(currentDate);
         Glide.with(viewHolder.itemView.getContext())
                 .load(item.getThumbnail_src())
                 .into(viewHolder.ivMovie);

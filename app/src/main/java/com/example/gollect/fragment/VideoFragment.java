@@ -52,7 +52,7 @@ public class VideoFragment extends Fragment {
     }
 
     private void getVideoContents(){
-        new GetNetworkManager("/contents/video/users/"+30) {
+        new GetNetworkManager("/contents/video/users/"+23) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
@@ -90,7 +90,7 @@ public class VideoFragment extends Fragment {
             JSONArray jsonArray;
             if(json != null) {
                 jsonArray = new JSONArray(json.getJSONArray("videoContents").toString());
-                for (int i = jsonArray.length() - 1; i >= 0; i--) {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String platformId = jsonObject.getString("platform_id");
                     String title = jsonObject.getString("title");

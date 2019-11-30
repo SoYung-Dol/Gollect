@@ -54,7 +54,7 @@ public class TextFragment extends Fragment{
     }
 
     private void getTextContents(){
-        new GetNetworkManager("/contents/text/users/"+30) {
+        new GetNetworkManager("/contents/text/users/"+23) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
