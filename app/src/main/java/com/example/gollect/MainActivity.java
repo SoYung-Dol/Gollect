@@ -2,9 +2,12 @@ package com.example.gollect;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +24,7 @@ public class MainActivity extends BaseActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private BackPressCloseHandler backPressCloseHandler;
-    private Toast toast;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mContext = getApplicationContext();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
@@ -40,14 +44,23 @@ public class MainActivity extends BaseActivity {
         }
 
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+  /*
         tabLayout.addTab(tabLayout.newTab().setText("텍스트"));
         tabLayout.addTab(tabLayout.newTab().setText("동영상"));
         tabLayout.addTab(tabLayout.newTab().setText("텍스트 즐찾"));
         tabLayout.addTab(tabLayout.newTab().setText("동영상 즐찾"));
         tabLayout.addTab(tabLayout.newTab().setText("알림"));
         tabLayout.addTab(tabLayout.newTab().setText("설정"));
+   */
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.texticon_gollect_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.videoicon_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.textbookmark_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.videobookmark_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.notifications_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.setting_black_24dp));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
         viewPager = (ViewPager)findViewById(R.id.pager);
 
         TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -57,12 +70,61 @@ public class MainActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(5).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        break;
+                    case 1:
+                        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(5).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        break;
+                    case 2:
+                        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(5).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        break;
+                    case 3:
+                        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(5).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        break;
+                    case 4:
+                        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(5).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        break;
+                    case 5:
+                        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(4).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(5).getIcon().setColorFilter(getResources().getColor(R.color.gollectLight), PorterDuff.Mode.SRC_IN);
+                        break;
+                }
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
