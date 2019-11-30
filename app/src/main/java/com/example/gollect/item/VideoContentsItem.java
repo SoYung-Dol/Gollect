@@ -1,33 +1,69 @@
 package com.example.gollect.item;
 
 public class VideoContentsItem {
+    private String platformId;
     private String url;
     private String title;
+    private String thumbnail_src;
     private String duration;
-    private String uploaded_time;
+    private String uploaded_at;
 
-    public VideoContentsItem(String url, String title, String duration, String uploaded_time) {
+    public String getPlatformId() {
+        return platformId;
+    }
 
-        this.url = url;
-        this.title = title;
-        this.duration = duration;
-        this.uploaded_time = uploaded_time;
-
+    public void setPlatformId(String platformId) {
+        this.platformId = platformId;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public String getGenre() {
-        return duration;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getContent() {
-        return uploaded_time;
+    public void setTitle(String title) {
+        this.title = title;
     }
+
+    public String getThumbnail_src() {
+        return thumbnail_src;
+    }
+
+    public void setThumbnail_src(String thumbnail_src) {
+        this.thumbnail_src = thumbnail_src;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getUploaded_at() {
+        return uploaded_at;
+    }
+
+    public void setUploaded_at(String uploaded_at) {
+        this.uploaded_at = uploaded_at;
+    }
+
+    public VideoContentsItem(String platformId, String title, String thumbnail_src, String url, String duration, String uploaded_at) {
+
+        this.platformId = platformId;
+        this.title = title;
+        this.thumbnail_src = thumbnail_src;
+        this.url = url;
+        this.duration = duration;
+        this.uploaded_at = uploaded_at;
+    }
+
 }

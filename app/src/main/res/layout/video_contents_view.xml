@@ -19,9 +19,10 @@
 
             <ImageView
                 android:id="@+id/video_thumnail_src"
-                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"/>
+                android:layout_height="240dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,22 +42,19 @@
                     android:textColor="@android:color/black"
                     android:textSize="18dp"/>
 
-
                 <TextView
                     android:id="@+id/video_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="Movie Genre"
-                    android:textColor="@android:color/black"
                     android:textSize="12dp"/>
 
                 <TextView
                     android:id="@+id/video_uploaded_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Movie Content"
-                    android:textColor="@android:color/black"/>
+                    android:text="Movie Content"/>
             </LinearLayout>
 
         </LinearLayout>

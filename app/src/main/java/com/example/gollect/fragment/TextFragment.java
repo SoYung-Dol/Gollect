@@ -3,21 +3,16 @@ package com.example.gollect.fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.gollect.LoginActivity;
 import com.example.gollect.R;
-import com.example.gollect.adapter.BmViewAdapter;
 import com.example.gollect.adapter.TcViewAdapter;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.utility.GetNetworkManager;
@@ -59,7 +54,7 @@ public class TextFragment extends Fragment{
     }
 
     private void getTextContents(){
-        new GetNetworkManager("/contents/text/users/"+30) {
+        new GetNetworkManager("/contents/text/users/"+23) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

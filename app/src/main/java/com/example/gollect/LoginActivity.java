@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.utility.BackPressCloseHandler;
 import com.example.gollect.utility.GetNetworkManager;
 import com.example.gollect.utility.PostNetworkManager;
@@ -17,13 +18,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends BaseActivity {
 
     private static final int GOOGLE_SIGN_IN = 9001;
-    private GoogleApiClient mGoogleApiClient;
     private String TAG = "LoginActivity";
     SharedPreferences loginInfoPreferences;
     public boolean first_google_login;
@@ -91,7 +92,11 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    public void onStart(){
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -118,8 +123,8 @@ public class LoginActivity extends BaseActivity {
         getUserData().setUserHash(user_hash+"");
         getUserData().setUserEmail(user_email);
 
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
+        Intent MainActivity = new Intent(this, MainActivity.class);
+        startActivity(MainActivity);
 /*
         try{
             JSONObject jsonObject = new JSONObject();
@@ -156,66 +161,10 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void responseCallback(JSONObject responseJson) {
-
                     try {
-                        if (responseJson.getBoolean("success")) {
+                        if (responseJson.getString("result").contains("success")) {
                             googleLoginStep3();
                         }else{
-                            //googleLoginStep2();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.execute();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }*/
-    }
-/*
-    //회원가입
-    public void googleLoginStep2(){
-        try{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("user_hash",user_hash);
-            jsonObject.accumulate("user_name",user_name);
-            jsonObject.accumulate("user_email",user_email);
-
-            new PostNetworkManager("/users/signup",jsonObject) {
-                @Override
-                public void errorCallback(int status) {
-                    super.errorCallback(status);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finishAffinity();
-                                    System.runFinalization();
-                                    System.exit(0);
-                                    dialog.dismiss();
-                                }
-                            };
-
-                            new android.app.AlertDialog.Builder(LoginActivity.this)
-                                    .setTitle(getString(R.string.network_err_msg))
-                                    .setPositiveButton(getString(R.string.ok), exitListener)
-                                    .setCancelable(false)
-                                    .show();
-                        }
-                    });
-                }
-
-                @Override
-                public void responseCallback(JSONObject responseJson) {
-
-                    try {
-                        if (responseJson.getBoolean("result")) {
-                            googleLoginStep3();
-                        }else{
-                            Log.d(TAG,"회원가입실패");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -225,11 +174,12 @@ public class LoginActivity extends BaseActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
+
+ */
     }
-*/
+
     //로그인
     public void googleLoginStep3() {
-        JSONObject jsonObject = new JSONObject();
         new GetNetworkManager("/users/"+user_hash) {
             @Override
             public void errorCallback(int status) {
@@ -261,8 +211,12 @@ public class LoginActivity extends BaseActivity {
             public void responseCallback(JSONObject responseJson) {
 
                 try {
-                    if (responseJson.getBoolean("result")) {
+                    if (responseJson.getString("result").contains("success")) {
                         Log.d(TAG,"로그인성공");
+                        JSONArray jsonArray = new JSONArray(responseJson.getJSONArray("user").toString());
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        Integer userId = jsonObject.getInt("id");
+                        getUserData().setUserID(userId);
                         loginSuccess();
                     }else{
                         Log.d(TAG,"로그인실패");
@@ -274,7 +228,7 @@ public class LoginActivity extends BaseActivity {
         }.execute();
     }
     public void loginSuccess(){
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
+        Intent SubscribeActivity = new Intent(this, SubscibeActivity.class);
+        startActivity(SubscribeActivity);
     }
 }
