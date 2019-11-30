@@ -32,8 +32,6 @@ public class SubscibeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe);
-        //전체 Diary 목록을 Realm에 요청해서 받아오는 코드입니다
-
         Button completeBt = findViewById(R.id.completeBt);
         //전체 Diary 목록을 Realm에 요청해서 받아오는 코드입니다
 
