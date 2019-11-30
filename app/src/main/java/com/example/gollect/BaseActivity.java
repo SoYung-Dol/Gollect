@@ -1,12 +1,22 @@
 package com.example.gollect;
 
+import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import static com.example.gollect.adapter.StViewAdapter.mGoogleApiClient;
 
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener  {
 
     private static UserData     userData;
+    public static GoogleApiClient mGoogleApiClient;
 
     public final static boolean DEBUG_LOG                          = true;
     public static final String Preferences_LOGIN				    = "login";
@@ -15,6 +25,16 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void googleSignout(){
+
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                Log.d("jaejin","google sign out!!");
+                System.exit(0);
+            }
+        });
+    }
     public UserData getUserData() {
         return userData;
     }

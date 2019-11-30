@@ -42,7 +42,8 @@ public class MainActivity extends BaseActivity {
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("텍스트"));
         tabLayout.addTab(tabLayout.newTab().setText("동영상"));
-        tabLayout.addTab(tabLayout.newTab().setText("즐겨찾기"));
+        tabLayout.addTab(tabLayout.newTab().setText("텍스트 즐찾"));
+        tabLayout.addTab(tabLayout.newTab().setText("동영상 즐찾"));
         tabLayout.addTab(tabLayout.newTab().setText("알림"));
         tabLayout.addTab(tabLayout.newTab().setText("설정"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);

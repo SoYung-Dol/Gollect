@@ -64,10 +64,6 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
         return items.size();
     }
 
-    public void setItems(ArrayList<VideoContentsItem> items) {
-        this.items = items;
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnCreateContextMenuListener, View.OnClickListener, MenuItem.OnMenuItemClickListener{
 

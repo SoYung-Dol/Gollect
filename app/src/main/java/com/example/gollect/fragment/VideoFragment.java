@@ -7,16 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gollect.R;
-import com.example.gollect.adapter.TcViewAdapter;
 import com.example.gollect.adapter.VcViewAdapter;
-import com.example.gollect.item.SampleData;
-import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 import com.example.gollect.utility.GetNetworkManager;
 

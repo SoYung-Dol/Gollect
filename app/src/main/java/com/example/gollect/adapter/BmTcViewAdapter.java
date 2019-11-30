@@ -1,10 +1,8 @@
 package com.example.gollect.adapter;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gollect.R;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHolder> {
+public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmViewHolder> {
 
     private ArrayList<TextContentsItem> items = new ArrayList<>();
 
@@ -35,7 +33,7 @@ public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHol
     }
     @NonNull
     @Override
-    public BmViewAdapter.BmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BmTcViewAdapter.BmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.text_contents_view,parent,false);
 
         BmViewHolder bmViewHolder = new BmViewHolder(view);
@@ -44,7 +42,7 @@ public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BmViewAdapter.BmViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BmTcViewAdapter.BmViewHolder holder, int position) {
         TextContentsItem item = items.get(position);
 
         holder.image.setText(item.getPlatformId());
@@ -66,6 +64,5 @@ public class BmViewAdapter extends  RecyclerView.Adapter<BmViewAdapter.BmViewHol
 
         items.add(item);
     }
-
- */
+*/
 }

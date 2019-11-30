@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,7 +38,8 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
         this.items = listitems;
         this.context = context;
     }
-    public class TcViewHolder extends RecyclerView.ViewHolder {
+    public class TcViewHolder extends RecyclerView.ViewHolder
+            implements View.OnCreateContextMenuListener, View.OnClickListener, MenuItem.OnMenuItemClickListener{
 
         private TextView platform;
         private TextView title;
@@ -61,6 +65,32 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
                     context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
+
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            int id = item.getItemId();
+
+            switch (id){
+                case R.id.bookmark_menu:
+                    String titleStr = items.get(getAdapterPosition()).getTitle();
+                    Log.d("jaejin",titleStr+"짱짱");
+                    break;
+            }
+            return true;
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem bookmark = menu.add(Menu.NONE,R.id.bookmark_menu,1,"즐겨찾기");
+            bookmark.setOnMenuItemClickListener(this);
         }
     }
     @NonNull
