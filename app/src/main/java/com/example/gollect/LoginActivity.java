@@ -115,6 +115,7 @@ public class LoginActivity extends BaseActivity {
 
     //회원가입 및 회원가입확인
     public void googleLoginStep1(){
+        Log.d("jaejin","googleLogin");
         user_name = loginInfoPreferences.getString("user_name","");
         user_hash = loginInfoPreferences.getString("user_hash","");
         user_email = loginInfoPreferences.getString("user_email","");
