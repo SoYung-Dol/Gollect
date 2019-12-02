@@ -49,9 +49,11 @@ public class StViewAdapter extends RecyclerView.Adapter<StViewAdapter.StViewHold
                     int position = getAdapterPosition();
                     if(position == 0){ //구독정보설정
 
-                    }else if(position == 1){ //알림키워드설정
+                    }else if(position == 1) { //알림키워드설정
 
-                    }else if(position == 2){ //로그아웃
+                    }else if(position == 2) { //플랫폼 신청
+
+                    }else if(position == 3){ //로그아웃
                         new BaseActivity().googleSignout();
                     }
                 }

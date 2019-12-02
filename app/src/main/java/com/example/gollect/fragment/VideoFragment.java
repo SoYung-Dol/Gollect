@@ -6,7 +6,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +29,8 @@ public class VideoFragment extends Fragment {
 
     private VcViewAdapter adapter;
     private List<VideoContentsItem> items;
-    RecyclerView recyclerView;
-
+    private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public VideoFragment(){}
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -47,6 +49,17 @@ public class VideoFragment extends Fragment {
         items = new ArrayList<>();
 
         getVideoContents();
+
+        swipeRefreshLayout = view.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getVideoContents();
+
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return view;
     }
