@@ -35,8 +35,9 @@ public class SettingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_subscriptions_red_24dp), "구독 정보 설정");
+        adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_subscriptions_red_24dp), "내 구독 정보 설정");
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_notifications_24dp), "알림 키워드 설정");
+        adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_add_platform_24dp),"플랫폼 신청");
         adapter.addItem(ContextCompat.getDrawable(getActivity(),R.drawable.ic_lock_open_gray24dp), "로그아웃");
         return view;
     }

@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,8 @@ public class TextFragment extends Fragment{
 
     private TcViewAdapter adapter;
     private List<TextContentsItem> items;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public TextFragment(){}
     @Override
@@ -50,6 +53,17 @@ public class TextFragment extends Fragment{
 
         getTextContents();
 
+        swipeRefreshLayout = view.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("jaejin","hi");
+                getTextContents();
+
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return view;
     }
 
@@ -92,7 +106,7 @@ public class TextFragment extends Fragment{
             JSONArray jsonArray;
             if(json != null) {
                 jsonArray = new JSONArray(json.getJSONArray("textContents").toString());
-                for (int i = jsonArray.length() - 1; i >= 0; i--) {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String platformId = jsonObject.getString("platform_id");
                     String title = jsonObject.getString("title");

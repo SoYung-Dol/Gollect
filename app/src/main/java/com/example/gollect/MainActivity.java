@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
         mContext = getApplicationContext();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
@@ -153,7 +154,12 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.search_menu:
+            case R.id.more_menu:
+                break;
+            case R.id.notice:
+                Log.d("jaejin","search");
+                break;
+            case R.id.app_info:
                 Log.d("jaejin","search");
                 break;
         }
