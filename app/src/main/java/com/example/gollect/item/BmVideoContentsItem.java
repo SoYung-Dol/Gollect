@@ -1,6 +1,6 @@
 package com.example.gollect.item;
 
-public class VideoContentsItem {
+public class BmVideoContentsItem {
     private int videoContentId;
     private String platformId;
     private String url;
@@ -10,12 +10,12 @@ public class VideoContentsItem {
     private String uploaded_at;
     private int domainId;
 
-    public VideoContentsItem(int videoContentId, String platformId, String title, String thumbnail_src, String url, String duration, String uploaded_at, int domainId) {
+    public BmVideoContentsItem(int videoContentId, String platformId, String title, String thumbnail_src, String url, String duration, String uploaded_at, int domainId) {
         this.videoContentId = videoContentId;
         this.platformId = platformId;
+        this.url = url;
         this.title = title;
         this.thumbnail_src = thumbnail_src;
-        this.url = url;
         this.duration = duration;
         this.uploaded_at = uploaded_at;
         this.domainId = domainId;
@@ -84,5 +84,4 @@ public class VideoContentsItem {
     public void setUploaded_at(String uploaded_at) {
         this.uploaded_at = uploaded_at;
     }
-
 }

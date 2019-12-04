@@ -18,58 +18,104 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.gollect.MainActivity;
 import com.example.gollect.R;
-import com.example.gollect.item.BmTextContentsItem;
-import com.example.gollect.item.TextContentsItem;
+import com.example.gollect.item.BmVideoContentsItem;
 import com.example.gollect.utility.DeleteNetworkManager;
-import com.example.gollect.utility.PostNetworkManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmViewHolder> {
+public class BmVcViewAdapter extends RecyclerView.Adapter<BmVcViewAdapter.BmVcViewHolder>  {
 
-    private List<BmTextContentsItem> items;
+    private List<BmVideoContentsItem> items;
     private Context context;
     private Date date;
     private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private String getTime;
 
-    public BmTcViewAdapter(List<BmTextContentsItem> listitems, Context context){
-        this.items = listitems;
+    public BmVcViewAdapter(List<BmVideoContentsItem> items, Context context){
+        this.items = items;
         this.context = context;
     }
 
-    public class BmViewHolder extends RecyclerView.ViewHolder
+    @NonNull
+    @Override
+    public BmVcViewAdapter.BmVcViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_contents_view,parent,false);
+
+        BmVcViewAdapter.BmVcViewHolder bmVcViewHolder = new BmVcViewAdapter.BmVcViewHolder(view);
+
+        return bmVcViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BmVcViewAdapter.BmVcViewHolder holder, int position) {
+        BmVideoContentsItem item = items.get(position);
+
+        long now = System.currentTimeMillis();
+        date = new Date(now);
+        getTime = simpleDateFormat.format(date);
+
+        String month = item.getUploaded_at().substring(5,7);
+        String day = item.getUploaded_at().substring(8,10);
+
+        String currentDate = month+"/"+day;
+
+        Glide.with(holder.itemView.getContext())
+                .load(item.getUrl())
+                .into(holder.ivMovie);
+
+        if(item.getDomainId() == 1){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_youtube));
+        }else if(item.getDomainId() == 2){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_afreeca));
+        }else if(item.getDomainId() == 3){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_twitch));
+        }else if(item.getDomainId() == 4){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_dc));
+        }else if(item.getDomainId() == 5){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_inven));
+        }
+        holder.video_title.setText(item.getTitle());
+        holder.video_duration.setText(item.getDuration());
+        holder.video_uploaded_at.setText(currentDate);
+        Glide.with(holder.itemView.getContext())
+                .load(item.getThumbnail_src())
+                .into(holder.ivMovie);
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public class BmVcViewHolder extends RecyclerView.ViewHolder
             implements View.OnCreateContextMenuListener, View.OnClickListener, MenuItem.OnMenuItemClickListener{
 
-        private ImageView platform;
-        private TextView title;
-        private TextView summary;
-        private TextView upload_time;
-        private ImageView imageView;
+        ImageView ivMovie, platform;
+        TextView video_title, video_duration, video_uploaded_at;
 
-        public BmViewHolder(@NonNull View itemView) {
+        public BmVcViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            ivMovie = itemView.findViewById(R.id.video_thumnail_src);
             platform = itemView.findViewById(R.id.platform);
-            title = itemView.findViewById(R.id.title);
-            summary = itemView.findViewById(R.id.summary);
-            upload_time = itemView.findViewById(R.id.uploaded_time);
-            imageView = itemView.findViewById(R.id.imageSrc);
+            video_title = itemView.findViewById(R.id.video_title);
+            video_duration = itemView.findViewById(R.id.video_duration);
+            video_uploaded_at = itemView.findViewById(R.id.video_uploaded_at);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
                     int position = getAdapterPosition();
-                    BmTextContentsItem bmTextContentsitem = items.get(position);
-                    String url = bmTextContentsitem.getUrl();
+                    BmVideoContentsItem videoContentsitem = items.get(position);
+                    String url = videoContentsitem.getUrl();
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
@@ -84,8 +130,9 @@ public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmVie
 
             switch (id){
                 case R.id.delete_menu:
-                    Integer textContentId = items.get(getAdapterPosition()).getTextContentId();
-                    deleteBookmark(textContentId,getAdapterPosition());
+                    Log.d("jaeji","삭제");
+                    int videoContentId = items.get(getAdapterPosition()).getVideoContentId();
+                    deleteBookmark(videoContentId,getAdapterPosition());
                     break;
             }
             return true;
@@ -102,65 +149,20 @@ public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmVie
             bookmark.setOnMenuItemClickListener(this);
         }
     }
-    @NonNull
-    @Override
-    public BmTcViewAdapter.BmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.text_contents_view,parent,false);
-
-        BmViewHolder bmViewHolder = new BmViewHolder(view);
-
-        return bmViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull BmTcViewAdapter.BmViewHolder holder, int position) {
-        BmTextContentsItem item = items.get(position);
-
-        long now = System.currentTimeMillis();
-        date = new Date(now);
-        getTime = simpleDateFormat.format(date);
-
-        String date = item.getUploaded_at().substring(5,10);
-        String time = item.getUploaded_at().substring(11,16);
-        String currentDate = getTime.substring(5,10);
-
-        if(item.getDomainId() == 1){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_youtube));
-        }else if(item.getDomainId() == 2){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_afreeca));
-        }else if(item.getDomainId() == 3){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_twitch));
-        }else if(item.getDomainId() == 4){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_dc));
-        }else if(item.getDomainId() == 5){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_inven));
-        }
-        holder.title.setText(item.getTitle());
-        holder.summary.setText(item.getSummary());
-        if(date == currentDate) holder.upload_time.setText(time);
-        else holder.upload_time.setText(date);
-
-        Glide.with(holder.itemView.getContext())
-                .load(item.getImg_src())
-                .into(holder.imageView);
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
 
     private void deleteBookmark(int id, int position){
         items.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, items.size());  // 아이템 삭제시 즉시 삭제 처리 되는 코드 3줄
-        int textcontentid = id;
+        notifyItemRangeChanged(position, items.size());
+        int videocontentid = id;
+        Log.d("jaejina",videocontentid+"");
+        Log.d("jaejinb",position+"");
 
         try{
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("hi",textcontentid);
+            jsonObject.accumulate("hi",videocontentid);
 
-            new DeleteNetworkManager("/bookmarks/users/"+23+"/contents/text/"+textcontentid,jsonObject) {
+            new DeleteNetworkManager("/bookmarks/users/"+23+"/contents/video/"+videocontentid,jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);

@@ -1,7 +1,9 @@
 package com.example.gollect.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -14,9 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.gollect.BaseActivity;
+import com.example.gollect.LoginActivity;
+import com.example.gollect.MainActivity;
 import com.example.gollect.R;
+import com.example.gollect.UserData;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
+import com.example.gollect.utility.PostNetworkManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,13 +37,14 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHolder> {
+public class TcViewAdapter extends RecyclerView.Adapter<TcViewAdapter.TcViewHolder> {
 
     private List<TextContentsItem> items;
     private Context context;
     private Date date;
     private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private String getTime;
+
     public TcViewAdapter(List<TextContentsItem> listitems, Context context){
         this.items = listitems;
         this.context = context;
@@ -41,7 +52,7 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
     public class TcViewHolder extends RecyclerView.ViewHolder
             implements View.OnCreateContextMenuListener, View.OnClickListener, MenuItem.OnMenuItemClickListener{
 
-        private TextView platform;
+        private ImageView platform;
         private TextView title;
         private TextView summary;
         private TextView upload_time;
@@ -75,8 +86,8 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
 
             switch (id){
                 case R.id.bookmark_menu:
-                    String titleStr = items.get(getAdapterPosition()).getTitle();
-                    Log.d("jaejin",titleStr+"짱짱");
+                    Integer textContentId = items.get(getAdapterPosition()).getTextContentId();
+                    addBookmark(textContentId);
                     break;
             }
             return true;
@@ -111,11 +122,23 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
         date = new Date(now);
         getTime = simpleDateFormat.format(date);
 
-        String date = item.getUploaded_at().substring(5,10);
+        String month  = item.getUploaded_at().substring(5,7);
+        String day  = item.getUploaded_at().substring(8,10);
+        String date = month + "/" + day;
         String time = item.getUploaded_at().substring(11,16);
         String currentDate = getTime.substring(5,10);
 
-        holder.platform.setText(item.getPlatformId());
+        if(item.getDomainId() == 1){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_youtube));
+        }else if(item.getDomainId() == 2){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_afreeca));
+        }else if(item.getDomainId() == 3){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_twitch));
+        }else if(item.getDomainId() == 4){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_dc));
+        }else if(item.getDomainId() == 5){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_inven));
+        }
         holder.title.setText(item.getTitle());
         holder.summary.setText(item.getSummary());
         if(date == currentDate) holder.upload_time.setText(time);
@@ -129,5 +152,58 @@ public class TcViewAdapter extends  RecyclerView.Adapter<TcViewAdapter.TcViewHol
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    private void addBookmark(int id){
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
+        int contentId = id;
+
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("textContentId",contentId);
+
+            new PostNetworkManager("/bookmarks/users/"+23+"/contents/text",jsonObject) {
+                @Override
+                public void errorCallback(int status) {
+                    super.errorCallback(status);
+
+                    ((MainActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((MainActivity)context).finishAffinity();
+                                    System.runFinalization();
+                                    System.exit(0);
+                                    dialog.dismiss();
+                                }
+                            };
+
+                            new android.app.AlertDialog.Builder(context)
+                                    .setTitle(Resources.getSystem().getString(R.string.network_err_msg))
+                                    .setPositiveButton(Resources.getSystem().getString(R.string.ok), exitListener)
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                    });
+                }
+
+                @Override
+                public void responseCallback(JSONObject responseJson) {
+                    try {
+                        if (responseJson.getString("result").contains("success")) {
+
+                        }else{
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.execute();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 }

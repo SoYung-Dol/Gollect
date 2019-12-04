@@ -1,11 +1,14 @@
 package com.example.gollect;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -24,6 +27,7 @@ public class MainActivity extends BaseActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private BackPressCloseHandler backPressCloseHandler;
+    private BaseActivity baseActivity;
     private Context mContext;
 
     @Override
@@ -160,7 +164,7 @@ public class MainActivity extends BaseActivity {
                 Log.d("jaejin","search");
                 break;
             case R.id.app_info:
-                Log.d("jaejin","search");
+                showAppInfoDialog();
                 break;
         }
         return true;
@@ -173,5 +177,21 @@ public class MainActivity extends BaseActivity {
         } else {
             return false;
         }
+    }
+
+    private void showAppInfoDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+        dialog.setTitle("App info");
+        dialog.setMessage("\n"+"Current version : 1.0.0" + "\n\n" + "Created by SoYungDol");
+
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

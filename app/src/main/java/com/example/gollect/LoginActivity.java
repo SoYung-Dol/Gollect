@@ -1,5 +1,6 @@
 package com.example.gollect;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -91,6 +92,10 @@ public class LoginActivity extends BaseActivity {
         }
 
     }
+    @Override
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
+    }
 
     @Override
     public void onStart(){
@@ -115,7 +120,6 @@ public class LoginActivity extends BaseActivity {
 
     //회원가입 및 회원가입확인
     public void googleLoginStep1(){
-        Log.d("jaejin","googleLogin");
         user_name = loginInfoPreferences.getString("user_name","");
         user_hash = loginInfoPreferences.getString("user_hash","");
         user_email = loginInfoPreferences.getString("user_email","");
@@ -124,9 +128,6 @@ public class LoginActivity extends BaseActivity {
         getUserData().setUserHash(user_hash+"");
         getUserData().setUserEmail(user_email);
 
-        Intent MainActivity = new Intent(this, MainActivity.class);
-        startActivity(MainActivity);
-/*
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("userHash",user_hash);
@@ -175,8 +176,6 @@ public class LoginActivity extends BaseActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
-
- */
     }
 
     //로그인
@@ -216,9 +215,8 @@ public class LoginActivity extends BaseActivity {
                         Log.d(TAG,"로그인성공");
                         JSONArray jsonArray = new JSONArray(responseJson.getJSONArray("user").toString());
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        Integer userId = jsonObject.getInt("id");
-                        getUserData().setUserID(userId);
-                        loginSuccess();
+                        int userId = jsonObject.getInt("id");
+                        loginSuccess(userId);
                     }else{
                         Log.d(TAG,"로그인실패");
                     }
@@ -228,8 +226,9 @@ public class LoginActivity extends BaseActivity {
             }
         }.execute();
     }
-    public void loginSuccess(){
-        Intent SubscribeActivity = new Intent(this, SubscibeActivity.class);
-        startActivity(SubscribeActivity);
+    public void loginSuccess(int userid){
+        getUserData().setUserID(userid);
+        Intent subscribeActivity = new Intent(this, SubscibeActivity.class);
+        startActivity(subscribeActivity);
     }
 }

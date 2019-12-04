@@ -54,6 +54,7 @@ public class VideoFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                items.clear();
                 getVideoContents();
 
                 adapter.notifyDataSetChanged();
@@ -105,20 +106,24 @@ public class VideoFragment extends Fragment {
                 jsonArray = new JSONArray(json.getJSONArray("videoContents").toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    Integer videoContentId = jsonObject.getInt("videoContentId");
                     String platformId = jsonObject.getString("platform_id");
                     String title = jsonObject.getString("title");
                     String thumbanil_src = jsonObject.getString("thumbnail_src");
                     String url = jsonObject.getString("url");
                     String duration = jsonObject.getString("duration");
                     String temp_uploaded_at = jsonObject.getString("uploaded_at");
+                    int domainId = jsonObject.getInt("domain_id");
 
                     VideoContentsItem item = new VideoContentsItem(
+                            videoContentId,
                             platformId,
                             title,
                             thumbanil_src,
                             url,
                             duration,
-                            temp_uploaded_at
+                            temp_uploaded_at,
+                            domainId
                     );
                     items.add(item);
                 }

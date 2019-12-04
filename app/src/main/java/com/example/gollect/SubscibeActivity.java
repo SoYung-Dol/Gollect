@@ -160,6 +160,7 @@ public class SubscibeActivity extends AppCompatActivity {
 
     public void subscribeSuccess(){
         Intent mainActivity = new Intent(this, MainActivity.class);
+        getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(mainActivity);
     }
 }

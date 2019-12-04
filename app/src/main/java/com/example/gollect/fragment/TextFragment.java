@@ -57,7 +57,7 @@ public class TextFragment extends Fragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("jaejin","hi");
+                items.clear();
                 getTextContents();
 
                 adapter.notifyDataSetChanged();
@@ -108,20 +108,24 @@ public class TextFragment extends Fragment{
                 jsonArray = new JSONArray(json.getJSONArray("textContents").toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    int textContentId = jsonObject.getInt("textContentId");
                     String platformId = jsonObject.getString("platform_id");
                     String title = jsonObject.getString("title");
                     String summary = jsonObject.getString("abstract");
                     String url = jsonObject.getString("url");
                     String imgSrc = jsonObject.getString("img_src");
                     String temp_uploaded_at = jsonObject.getString("uploaded_at");
+                    int domainId = jsonObject.getInt("domain_id");
 
                     TextContentsItem item = new TextContentsItem(
+                            textContentId,
                             platformId,
                             title,
                             summary,
                             url,
                             imgSrc,
-                            temp_uploaded_at
+                            temp_uploaded_at,
+                            domainId
                     );
                     items.add(item);
                 }

@@ -1,8 +1,6 @@
 package com.example.gollect.item;
 
-import android.graphics.drawable.Drawable;
-
-public class TextContentsItem {
+public class BmTextContentsItem {
     private int textContentId;
     private String platformId;
     private String title;
@@ -12,7 +10,7 @@ public class TextContentsItem {
     private String uploaded_at;
     private int domainId;
 
-    public TextContentsItem(int textContentId, String platformId, String title, String summary, String url, String img_src, String uploaded_at, int domainId) {
+    public BmTextContentsItem(int textContentId, String platformId, String title, String summary, String url, String img_src, String uploaded_at, int domainId) {
         this.textContentId = textContentId;
         this.platformId = platformId;
         this.title = title;
@@ -39,30 +37,6 @@ public class TextContentsItem {
         this.textContentId = textContentId;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getImg_src() {
-        return img_src;
-    }
-
-    public void setImg_src(String img_src) {
-        this.img_src = img_src;
-    }
-
-    public String getUploaded_at() {
-        return uploaded_at;
-    }
-
-    public void setUploaded_at(String uploaded_at) {
-        this.uploaded_at = uploaded_at;
-    }
-
     public String getPlatformId() {
         return platformId;
     }
@@ -85,5 +59,29 @@ public class TextContentsItem {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getImg_src() {
+        return img_src;
+    }
+
+    public void setImg_src(String img_src) {
+        this.img_src = img_src;
+    }
+
+    public String getUploaded_at() {
+        return uploaded_at;
+    }
+
+    public void setUploaded_at(String uploaded_at) {
+        this.uploaded_at = uploaded_at;
     }
 }

@@ -2,12 +2,12 @@ package com.example.gollect;
 
 public class UserData {
     private String userName, userEmail, userHash;
-    private Integer userID;
+    private int userID;
 
-    public void setUserID(Integer userID){
+    public void setUserID(int userID){
         this.userID = userID;
     }
-    public Integer getUserID(){
+    public int getUserID(){
         return this.userID;
     }
 
