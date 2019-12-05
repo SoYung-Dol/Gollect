@@ -48,9 +48,10 @@ public class StViewAdapter extends RecyclerView.Adapter<StViewAdapter.StViewHold
                 @Override
                 public void onClick(View v){
                     int position = getAdapterPosition();
-                    if(position == 0){ //구독정보설정
-
-                    }else if(position == 1) { //알림키워드설정
+                    //구독정보설정
+                    if(position == 0)
+                        context.startActivity(new Intent(context, SubscibeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    else if(position == 1) { //알림키워드설정
 
                     }else if(position == 2) { //플랫폼 신청
                         context.startActivity(new Intent(context, RequestPlatformActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -103,21 +104,23 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     void show()
     {
-        final List<String> ListItems = new ArrayList<>();
-        //키워드 가져오는 메소드 필요
-        ListItems.add("사과");
-        ListItems.add("배");
-        ListItems.add("귤");
-        ListItems.add("바나나");
-        final CharSequence[] items =  ListItems.toArray(new String[ ListItems.size()]);
+        final EditText edittext = new EditText(activity);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("키워드 관리");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int pos) {
-                String selectedText = items[pos].toString();
-            }
-        });
+        builder.setTitle("키워드 설정");
+        builder.setMessage("키워드 추가");
+        builder.setView(edittext);
+        builder.setPositiveButton("추가",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.setNegativeButton("취소",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
         builder.show();
     }
 

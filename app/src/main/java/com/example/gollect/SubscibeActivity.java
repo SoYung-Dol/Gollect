@@ -33,7 +33,6 @@ public class SubscibeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe);
         Button completeBt = findViewById(R.id.completeBt);
-        //전체 Diary 목록을 Realm에 요청해서 받아오는 코드입니다
 
         completeBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +155,70 @@ public class SubscibeActivity extends AppCompatActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    public void getKeyword() {
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
+
+        JSONObject jsonObject = new JSONObject();
+
+        //플랫폼 아이디 추가해야함
+        new GetNetworkManager("/subscriptions/users/"+user_id) {
+            @Override
+            public void errorCallback(int status) {
+                super.errorCallback(status);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finishAffinity();
+                                System.runFinalization();
+                                System.exit(0);
+                                dialog.dismiss();
+                            }
+                        };
+
+                        new android.app.AlertDialog.Builder(SubscibeActivity.this)
+                                .setTitle(getString(R.string.network_err_msg))
+                                .setPositiveButton(getString(R.string.ok), exitListener)
+                                .setCancelable(false)
+                                .show();
+                    }
+                });
+            }
+
+            @Override
+            public void responseCallback(JSONObject responseJson) {
+
+                try {
+                    if (responseJson.getString("result").contains("success")) {
+                        ArrayList<Integer> idList = new ArrayList<>();
+                        ArrayList<String> nameList = new ArrayList<>();
+                        ArrayList<String> urlList = new ArrayList<>();
+                        for (int i=0; i<responseJson.getJSONArray("platforms").length(); i++) {
+                            nameList.add(responseJson.getJSONArray("platforms").getJSONObject(i).getString("name")) ;
+                        }
+                        Log.d(TAG,responseJson.getJSONArray("platforms").getJSONObject(1).getString("name"));
+                        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
+                        RecyclerView recyclerView = findViewById(R.id.rv_platform) ;
+                        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                        recyclerView.setLayoutManager(new LinearLayoutManager(SubscibeActivity.this)) ;
+
+                        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
+                        SubscribeRecyclerviewAdapter adapter = new SubscribeRecyclerviewAdapter(SubscibeActivity.this, nameList) ;
+                        recyclerView.setAdapter(adapter) ;
+                    }else{
+                        Log.d(TAG,responseJson.getString("result"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
     }
 
     public void subscribeSuccess(){
