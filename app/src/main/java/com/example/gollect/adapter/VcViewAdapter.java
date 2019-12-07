@@ -16,12 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.example.gollect.BaseActivity;
 import com.example.gollect.MainActivity;
 import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 import com.example.gollect.utility.PostNetworkManager;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
