@@ -1,5 +1,6 @@
 package com.example.gollect;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,10 +10,13 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gollect.adapter.DifferentRowAdapter;
 import com.example.gollect.adapter.SubscribeRecyclerviewAdapter;
 import com.example.gollect.utility.DeleteNetworkManager;
 import com.example.gollect.utility.GetNetworkManager;
@@ -87,27 +91,28 @@ public class SubscribeActivity extends AppCompatActivity {
                         for(int j =0;j<groupList.size();j++) {
                             for (int i = 0; i < responseJson.getJSONArray("platforms").length(); i++) {
                                 if (i==0) {
-                                    nameList.add(new PlatformData(groupList.get(current),null,-1));
+                                    nameList.add(new PlatformData(groupList.get(current),null,-1,PlatformData.HEADER_TYPE));
                                     current += 1;
                                 }
                                 if (current == responseJson.getJSONArray("platforms").getJSONObject(i).getInt("domain_id")) {
                                     PlatformName = responseJson.getJSONArray("platforms").getJSONObject(i).getString("name");
                                     ImageUrl = responseJson.getJSONArray("platforms").getJSONObject(i).getString("logo_url");
                                     PlatformId = responseJson.getJSONArray("platforms").getJSONObject(i).getInt("id");
-                                    nameList.add(new PlatformData(PlatformName, ImageUrl, PlatformId));
+                                    nameList.add(new PlatformData(PlatformName, ImageUrl, PlatformId,PlatformData.CHILD_TYPE));
                                     //nameList.add(responseJson.getJSONArray("platforms").getJSONObject(i).getString("name"));
                                 }
                             }
                         }
                         Log.d(TAG,responseJson.getJSONArray("platforms").getJSONObject(1).getString("name"));
-                        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
-                        RecyclerView recyclerView = findViewById(R.id.rv_platform) ;
-                        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-                        recyclerView.setLayoutManager(new LinearLayoutManager(SubscribeActivity.this)) ;
 
-                        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-                        SubscribeRecyclerviewAdapter adapter = new SubscribeRecyclerviewAdapter(SubscribeActivity.this, nameList, subsList) ;
-                        recyclerView.setAdapter(adapter) ;
+                        SubscribeRecyclerviewAdapter adapter = new SubscribeRecyclerviewAdapter(SubscribeActivity.this, nameList, subsList);
+
+                        @SuppressLint("WrongConstant") LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SubscribeActivity.this, OrientationHelper.VERTICAL, false);
+                        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.rv_platform);
+                        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                        mRecyclerView.setLayoutManager(linearLayoutManager);
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mRecyclerView.setAdapter(adapter);
                     }else{
                         Log.d(TAG,responseJson.getString("result"));
                     }

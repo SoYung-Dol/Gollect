@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@color/hashtag_pink"
+    android:drawableRight="@drawable/ic_delete"
     android:ellipsize="end"
     android:maxLines="1"
     android:paddingLeft="8dp"

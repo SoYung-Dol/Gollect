@@ -16,12 +16,14 @@ import com.example.gollect.AlarmData;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.Realm;
 
 public class NotificationListener extends NotificationListenerService {
     public final static String TAG = "NotificationListener";
+    ArrayList<String> keywordList = new ArrayList<String>();
 
     //앱에 설치된 Realm파일을 찾아서 가져오는 코드
     Realm realm = Realm.getDefaultInstance();
@@ -111,5 +113,9 @@ public class NotificationListener extends NotificationListenerService {
             nextId = currentId.intValue() + 1;
         }
         return nextId;
+    }
+
+    public void setKeywordList(ArrayList<String> keywordList){
+        this.keywordList = keywordList;
     }
 }

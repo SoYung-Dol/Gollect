@@ -1,6 +1,10 @@
 package com.example.gollect;
 
 public class PlatformData {
+
+    public static final int HEADER_TYPE = 0;
+    public static final int CHILD_TYPE = 1;
+
     String PlatformName;
     String ImageUrl;
     //PlatformId는 각각의 고유 id
@@ -8,6 +12,7 @@ public class PlatformData {
     //플랫폼의 1depth 종류
     int DomainId;
     boolean Subscribe;
+    private int mType;
 
     public PlatformData(int platformId, boolean subscribe) {
         this.PlatformId = platformId;
@@ -15,10 +20,15 @@ public class PlatformData {
 
     }
 
-    public PlatformData(String platformName, String imageUrl, int platformId) {
+    public PlatformData(String platformName, String imageUrl, int platformId, int type) {
         this.PlatformName = platformName;
         this.ImageUrl = imageUrl;
         this.PlatformId = platformId;
+        this.mType = type;
+    }
+
+    public int getType() {
+        return mType;
     }
 
     public String getPlatformName() {
