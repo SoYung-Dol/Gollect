@@ -1,12 +1,8 @@
 package com.example.gollect.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +11,12 @@ import android.widget.TextView;
 
 import com.example.gollect.BaseActivity;
 import com.example.gollect.LoginActivity;
-import com.example.gollect.MainActivity;
 import com.example.gollect.R;
 import com.example.gollect.RequestPlatformActivity;
-import com.example.gollect.SubscibeActivity;
+import com.example.gollect.SubscribeActivity;
 import com.example.gollect.item.SettingContentsItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,8 +43,9 @@ public class StViewAdapter extends RecyclerView.Adapter<StViewAdapter.StViewHold
                 public void onClick(View v){
                     int position = getAdapterPosition();
                     //구독정보설정
-                    if(position == 0)
-                        context.startActivity(new Intent(context, SubscibeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    if(position == 0) {
+                        context.startActivity(new Intent(context, SubscribeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }
                     else if(position == 1) { //알림키워드설정
 
                     }else if(position == 2) { //플랫폼 신청

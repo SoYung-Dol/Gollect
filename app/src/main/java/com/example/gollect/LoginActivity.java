@@ -1,6 +1,5 @@
 package com.example.gollect;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.utility.BackPressCloseHandler;
 import com.example.gollect.utility.GetNetworkManager;
 import com.example.gollect.utility.PostNetworkManager;
@@ -228,7 +226,7 @@ public class LoginActivity extends BaseActivity {
     }
     public void loginSuccess(int userid){
         getUserData().setUserID(userid);
-        Intent subscribeActivity = new Intent(this, SubscibeActivity.class);
+        Intent subscribeActivity = new Intent(this, SubscribeActivity.class);
         startActivity(subscribeActivity);
     }
 }

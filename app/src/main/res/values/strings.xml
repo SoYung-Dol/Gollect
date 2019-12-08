@@ -2,5 +2,6 @@
     <string name="app_name">Gollect</string>
     <string name="network_err_msg">network connection error</string>
     <string name="ok">Ok</string>
+    <string name="sample_hashtag">#Keyword</string>
 
 </resources>

@@ -50,7 +50,7 @@ public class AlarmFragment extends Fragment {
             nameList.add(String.format("%s", alarmRealmResults.get(i).getSender()));
             contentsList.add(String.format("%s", alarmRealmResults.get(i).getContents()));
 
-            SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
             String date = transFormat.format(alarmRealmResults.get(i).getWriteAt());
             dateList.add(String.format("%s",date));
