@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hashtagTextView"
+    fontPath="fonts/opensans_regular.ttf"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@color/hashtag_pink"
+    android:drawableRight="@drawable/ic_delete"
+    android:drawablePadding="5dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp"
+    android:text="Keyword"
+    android:textColor="@color/gray"
+    android:textSize="10dp"
+    tools:ignore="MissingPrefix" />
+

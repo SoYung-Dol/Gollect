@@ -15,7 +15,6 @@ public class AlarmData extends RealmObject {
     String contents;
     Date writeAt;
     int resId;
-    String resPackage;
 
     public AlarmData() {
     }

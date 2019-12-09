@@ -22,6 +22,10 @@ public abstract class DeleteNetworkManager extends AsyncTask<String, String, JSO
     String urlAddress = "";
     JSONObject requestJson, responseJson;
 
+    public DeleteNetworkManager(String path) {
+        this.urlAddress = URLPrefix + path;
+    }
+
     public DeleteNetworkManager(String path, JSONObject requestJson) {
         this.urlAddress = URLPrefix + path;
         this.requestJson = requestJson;

@@ -6,4 +6,10 @@
     <color name="colorBeige">#F5F5DC</color>
     <color name="colorBlack">#000000</color>
     <color name="gollectLight">#F6715D</color>
+    <color name="gray">#666666</color>
+    <color name="hashtag_purple">#EFBDEC</color>
+    <color name="hashtag_turquoise">#B4F3E0</color>
+    <color name="hashtag_pink">#FFC1C8</color>
+    <color name="hashtag_blue">#C1DDFF</color>
+    <color name="hashtag_yellow">#FFE5A7</color>
 </resources>

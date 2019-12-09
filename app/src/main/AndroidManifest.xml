@@ -18,14 +18,14 @@
         <activity android:name=".RequestPlatformActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
+          <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SubscibeActivity" />
-
+        <activity android:name=".SubscribeActivity" />
+        <activity android:name=".AlarmActivity"/>
         <service
             android:name=".utility.NotificationListener"
             android:label="Gollect"

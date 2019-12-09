@@ -21,6 +21,7 @@ import androidx.annotation.CallSuper;
 
 public abstract class PostNetworkManager extends AsyncTask<String, String, JSONObject> {
     String URLPrefix = "http://106.10.54.174";
+  
     String urlAddress = "";
     JSONObject requestJson, responseJson;
 
