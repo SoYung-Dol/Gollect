@@ -86,7 +86,7 @@ public class NotificationListener extends NotificationListenerService {
             @Override
             public void execute(Realm realm) {
                 //Realm에 생성한 다이어리를 저장하는 코드
-                realm.copyToRealm(AlarmData);
+                realm.copyToRealmOrUpdate(AlarmData);
                 // 저장한 다이어리를 다이어리 리스트에 담아주는코드
                 //AlarmDataList.add(AlarmData);
                 //AlarmDataAdapter.notifyDataSetChanged();

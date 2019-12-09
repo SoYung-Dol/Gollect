@@ -193,7 +193,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                             @Override
                             public void onClick(View v) {
                                 // Do your action
-                                subscribeActivity.deleteKeyword(23, 1, textView.getText().toString());
+                                subscribeActivity.deleteKeyword(23, platform_number, textView.getText().toString());
                                 mHashtagContainer.removeView(textView);
                             }
                         });
@@ -232,7 +232,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                 Log.d(Constraints.TAG,Keyword);
                 subscribeActivity.postAddKeyword(23, platform_number, Keyword);
                 //keywordList.add(Keyword);
-                addKeyword(Keyword, hashTagLayoutParams);
+                addKeyword(Keyword, hashTagLayoutParams, platform_number);
             }
         });
         dialog.setCanceledOnTouchOutside(false);
@@ -248,7 +248,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
         return randomColor;
     }
 
-    private void addKeyword(final String hashtag, FlowLayout.LayoutParams hashTagLayoutParams){
+    private void addKeyword(final String hashtag, FlowLayout.LayoutParams hashTagLayoutParams, final int platform_id){
         final TextView textView = (TextView)activity.getLayoutInflater().inflate(R.layout.keyword_item, null);
         textView.setText(hashtag);
         textView.setBackgroundColor(getRandomHashtagColor(activity));
@@ -271,7 +271,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
             public void onClick(View v)
             {
                 // Do your action
-                subscribeActivity.deleteKeyword(23, 1, textView.getText().toString());
+                subscribeActivity.deleteKeyword(23, platform_id, textView.getText().toString());
                 mHashtagContainer.removeView(textView);
             }
         });

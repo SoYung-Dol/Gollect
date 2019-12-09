@@ -8,13 +8,15 @@
     android:layout_margin="8dp"
     android:background="@color/hashtag_pink"
     android:drawableRight="@drawable/ic_delete"
+    android:drawablePadding="5dp"
     android:ellipsize="end"
     android:maxLines="1"
     android:paddingLeft="8dp"
     android:paddingTop="8dp"
     android:paddingRight="8dp"
     android:paddingBottom="8dp"
-    android:text="@string/sample_hashtag"
+    android:text="Keyword"
     android:textColor="@color/gray"
     android:textSize="10dp"
     tools:ignore="MissingPrefix" />
+

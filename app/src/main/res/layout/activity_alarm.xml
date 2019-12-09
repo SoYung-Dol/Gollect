@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gollect.AlarmActivity">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/alarm_title"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:text="Gollect"
+        android:textColor="@color/gollectLight"
+        android:textSize="20dp"
+        android:paddingLeft="10dp"
+        android:background="@color/colorBeige"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/enterAlarmKeyword"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/addAlarmKeyword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_title" />
+
+    <Button
+        android:id="@+id/addAlarmKeyword"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="@drawable/submit_button"
+        android:text="추가"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_title" />
+
+    <com.wefika.flowlayout.FlowLayout
+        android:id="@+id/hashtagContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="24dp"
+        android:gravity="center|top"
+        app:layout_constraintTop_toBottomOf="@+id/enterAlarmKeyword"
+        tools:layout_editor_absoluteX="24dp"></com.wefika.flowlayout.FlowLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

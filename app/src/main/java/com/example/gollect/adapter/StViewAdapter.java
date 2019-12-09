@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gollect.AlarmActivity;
 import com.example.gollect.BaseActivity;
 import com.example.gollect.LoginActivity;
 import com.example.gollect.R;
@@ -47,7 +48,7 @@ public class StViewAdapter extends RecyclerView.Adapter<StViewAdapter.StViewHold
                         context.startActivity(new Intent(context, SubscribeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
                     else if(position == 1) { //알림키워드설정
-
+                        context.startActivity(new Intent(context, AlarmActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }else if(position == 2) { //플랫폼 신청
                         context.startActivity(new Intent(context, RequestPlatformActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }else if(position == 3){ //로그아웃

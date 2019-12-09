@@ -25,7 +25,7 @@
         <activity android:name=".LoginActivity">
         </activity>
         <activity android:name=".SubscribeActivity" />
-
+        <activity android:name=".AlarmActivity"/>
         <service
             android:name=".utility.NotificationListener"
             android:label="Gollect"

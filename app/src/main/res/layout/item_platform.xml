@@ -41,6 +41,7 @@
         android:layout_marginEnd="5dp"
         android:text="키워드 설정"
         android:textSize="7dp"
+        android:background="@drawable/submit_button"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/subscribeBt"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +54,7 @@
         android:layout_marginEnd="10dp"
         android:text="구독"
         android:textSize="7dp"
+        android:background="@drawable/submit_button"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

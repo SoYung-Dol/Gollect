@@ -5,27 +5,37 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Constraints;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.gollect.adapter.DifferentRowAdapter;
 import com.example.gollect.adapter.SubscribeRecyclerviewAdapter;
 import com.example.gollect.utility.DeleteNetworkManager;
 import com.example.gollect.utility.GetNetworkManager;
 import com.example.gollect.utility.PostNetworkManager;
+import com.wefika.flowlayout.FlowLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SubscribeActivity extends AppCompatActivity {
 
@@ -37,6 +47,49 @@ public class SubscribeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe);
         Button completeBt = findViewById(R.id.completeBt);
+        Button allKeywordBt = findViewById(R.id.allkeywordBt);
+        allKeywordBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SubscribeActivity.this);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.custom_dialog,null);
+
+                builder.setView(dialogView);
+
+                Button one = (Button) dialogView.findViewById(R.id.button1);
+                Button three = (Button) dialogView.findViewById(R.id.button3);
+                final EditText enterKeyword = (EditText)dialogView.findViewById(R.id.enterKeyword);
+
+                final AlertDialog dialog = builder.create();
+
+
+                one.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        dialog.cancel();
+                    }
+                });
+
+                three.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        keyword = enterKeyword.getText().toString();
+                        enterKeyword.setText("");
+                        getPlatfromList(2);
+                    }
+                });
+                dialog.setCanceledOnTouchOutside(false);
+
+                // Display the custom alert dialog on interface
+                dialog.show();
+            }
+        });
 
         completeBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +98,7 @@ public class SubscribeActivity extends AppCompatActivity {
             }
         });
 
-        getPlatfromList();
+        getPlatfromList(1);
     }
 
     public void getPlatforms(final ArrayList<PlatformData> subsList) {
@@ -338,7 +391,7 @@ public class SubscribeActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("keyword",keyword);
-        new DeleteNetworkManager("/subscriptions/users/23/platforms/1/",jsonObject) {
+        new DeleteNetworkManager("/subscriptions/users/" + 23 + "/platforms/" + platform_id + "/",jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
@@ -383,7 +436,7 @@ public class SubscribeActivity extends AppCompatActivity {
         }
     }
 
-    public void getPlatfromList(){
+    public void getPlatfromList(final int type){
         new GetNetworkManager("/subscriptions/users/" + 23) {
             @Override
             public void errorCallback(int status) {
@@ -424,7 +477,14 @@ public class SubscribeActivity extends AppCompatActivity {
                                 subsList.add(platform);
                             }
                         }
-                        getPlatforms(subsList);
+                        switch(type){
+                            case 1:
+                                getPlatforms(subsList);
+                            case 2:
+                                for(int i =0;i<subsList.size();i++) {
+                                    postAddKeyword(23, subsList.get(i).getPlatformId(),keyword);
+                                }
+                        }
                         Log.d(TAG, subsList.toString());
                     }else{
                         Log.d(TAG,responseJson.getString("result"));
@@ -436,6 +496,7 @@ public class SubscribeActivity extends AppCompatActivity {
             }
         }.execute();
     }
+
 
     public ArrayList<String> getGroupLIst(){
         ArrayList<String> groupList = new ArrayList<String>();
