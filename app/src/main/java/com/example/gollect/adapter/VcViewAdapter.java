@@ -16,12 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.example.gollect.BaseActivity;
 import com.example.gollect.MainActivity;
 import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 import com.example.gollect.utility.PostNetworkManager;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,10 +64,12 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
         date = new Date(now);
         getTime = simpleDateFormat.format(date);
 
-        String month = item.getUploaded_at().substring(5,7);
-        String day = item.getUploaded_at().substring(8,10);
-
-        String currentDate = month+"/"+day;
+        String month  = item.getUploaded_at().substring(5,7);
+        String day  = item.getUploaded_at().substring(8,10);
+        String date = month + "/" + day;
+        String date2 = month + "-" + day;
+        String time = item.getUploaded_at().substring(11,16);
+        String currentDate = getTime.substring(5,10);
 
         Glide.with(viewHolder.itemView.getContext())
                 .load(item.getUrl())
@@ -74,17 +78,24 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
         if(item.getDomainId() == 1){
             viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_youtube));
         }else if(item.getDomainId() == 2){
-            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_afreeca));
+            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_navertv));
         }else if(item.getDomainId() == 3){
-            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_twitch));
+            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_kakaotv));
         }else if(item.getDomainId() == 4){
             viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_dc));
         }else if(item.getDomainId() == 5){
             viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_inven));
+        }else if(item.getDomainId() == 6){
+            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_ajou));
+        }else if(item.getDomainId() == 7){
+            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_jungang));
+        }else if(item.getDomainId() == 8){
+            viewHolder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_yonhap));
         }
         viewHolder.video_title.setText(item.getTitle());
         viewHolder.video_duration.setText(item.getDuration());
-        viewHolder.video_uploaded_at.setText(currentDate);
+        if(date2.equals(currentDate)) viewHolder.video_uploaded_at.setText(time);
+        else viewHolder.video_uploaded_at.setText(date);
         Glide.with(viewHolder.itemView.getContext())
                 .load(item.getThumbnail_src())
                 .into(viewHolder.ivMovie);

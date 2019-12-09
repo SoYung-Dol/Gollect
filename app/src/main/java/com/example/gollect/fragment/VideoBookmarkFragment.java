@@ -51,7 +51,6 @@ public class VideoBookmarkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_video_bookmark, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(),1));
 
         items = new ArrayList<>();
 
@@ -123,6 +122,9 @@ public class VideoBookmarkFragment extends Fragment {
                     String duration = jsonObject.getString("duration");
                     String temp_uploaded_at = jsonObject.getString("uploaded_at");
                     int domainId = jsonObject.getInt("domain_id");
+
+                    if(thumbnail_src.charAt(0) != 'h')
+                        thumbnail_src = "https:"+thumbnail_src;
 
                     BmVideoContentsItem item = new BmVideoContentsItem(
                             videoContentId,

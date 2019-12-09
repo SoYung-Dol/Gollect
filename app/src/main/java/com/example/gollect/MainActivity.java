@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity {
             case R.id.more_menu:
                 break;
             case R.id.notice:
-                Log.d("jaejin","search");
+                showNotice();
                 break;
             case R.id.app_info:
                 showAppInfoDialog();
@@ -193,5 +193,10 @@ public class MainActivity extends BaseActivity {
         });
 
         dialog.show();
+    }
+
+    private void showNotice(){
+        Intent noticeActivity = new Intent(this, NoticeActivity.class);
+        startActivity(noticeActivity);
     }
 }
