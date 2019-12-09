@@ -74,7 +74,10 @@ public class VideoBookmarkFragment extends Fragment {
     }
 
     private void getBmVideoContents(){
-        new GetNetworkManager("/bookmarks/users/"+23+"/contents/video") {
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
+
+        new GetNetworkManager("/bookmarks/users/"+userID+"/contents/video") {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

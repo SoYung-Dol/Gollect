@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.Constraints;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.gollect.BaseActivity;
 import com.example.gollect.PlatformData;
 import com.example.gollect.R;
 
@@ -72,8 +73,9 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                 case CHILD_TYPE:
                     ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).platformName.setText(object.getPlatformName());
                     Glide.with(activity).load(mList.get(position).getImageUrl()).into(((SubscribeRecyclerviewAdapter.EventViewHolder) holder).platformLogo);
+                    ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).subscriveBt.setVisibility(View.VISIBLE);
                     for (int i = 0; i < mSubsList.size(); i++) {
-                        ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).subscriveBt.setVisibility(View.VISIBLE);
+
                         if (mList.get(position).getPlatformId() == mSubsList.get(i).getPlatformId()) {
                             Log.d(Constraints.TAG, "position: " + position + " size: " + mSubsList.size() + " Name: " + mSubsList.get(i).getPlatformName());
                             ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).subscriveBt.setText("구독 취소");
@@ -124,6 +126,8 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
 
         public EventViewHolder(View itemView) {
             super(itemView);
+            BaseActivity baseActivity = new BaseActivity();
+            final int userID = baseActivity.getUserData().getUserID();
 
             platformLogo = itemView.findViewById(R.id.platform_logo);
             platformName = itemView.findViewById(R.id.platform_name);
@@ -134,11 +138,11 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                 @Override
                 public void onClick(View v) {
                     if(subscriveBt.getText().toString().contains("취소")){
-                        subscribeActivity.deletePlatform(23,mList.get(getAdapterPosition()).getPlatformId());
+                        subscribeActivity.deletePlatform(userID,mList.get(getAdapterPosition()).getPlatformId());
                         subscriveBt.setText("구독");
                         keywordBt.setVisibility(View.INVISIBLE);
                     }else if(subscriveBt.getText().toString().contains("구독")) {
-                        subscribeActivity.postAddKeyword(23, mList.get(getAdapterPosition()).getPlatformId(), "");
+                        subscribeActivity.postAddKeyword(userID, mList.get(getAdapterPosition()).getPlatformId(), "");
                         subscriveBt.setText("구독 취소");
                         keywordBt.setVisibility(View.VISIBLE);
                     }
@@ -157,7 +161,8 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
 
     public void show(final int platform_number)
     {
-
+        BaseActivity baseActivity = new BaseActivity();
+        final int userID = baseActivity.getUserData().getUserID();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -193,7 +198,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                             @Override
                             public void onClick(View v) {
                                 // Do your action
-                                subscribeActivity.deleteKeyword(23, platform_number, textView.getText().toString());
+                                subscribeActivity.deleteKeyword(userID, platform_number, textView.getText().toString());
                                 mHashtagContainer.removeView(textView);
                             }
                         });
@@ -230,7 +235,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                 String Keyword = enterKeyword.getText().toString();
                 enterKeyword.setText("");
                 Log.d(Constraints.TAG,Keyword);
-                subscribeActivity.postAddKeyword(23, platform_number, Keyword);
+                subscribeActivity.postAddKeyword(userID, platform_number, Keyword);
                 //keywordList.add(Keyword);
                 addKeyword(Keyword, hashTagLayoutParams, platform_number);
             }
@@ -249,6 +254,8 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     private void addKeyword(final String hashtag, FlowLayout.LayoutParams hashTagLayoutParams, final int platform_id){
+        BaseActivity baseActivity = new BaseActivity();
+        final int userID = baseActivity.getUserData().getUserID();
         final TextView textView = (TextView)activity.getLayoutInflater().inflate(R.layout.keyword_item, null);
         textView.setText(hashtag);
         textView.setBackgroundColor(getRandomHashtagColor(activity));
@@ -271,7 +278,7 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
             public void onClick(View v)
             {
                 // Do your action
-                subscribeActivity.deleteKeyword(23, platform_id, textView.getText().toString());
+                subscribeActivity.deleteKeyword(userID, platform_id, textView.getText().toString());
                 mHashtagContainer.removeView(textView);
             }
         });

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.gollect.BaseActivity;
 import com.example.gollect.MainActivity;
 import com.example.gollect.R;
 import com.example.gollect.item.BmVideoContentsItem;
@@ -163,12 +164,14 @@ public class BmVcViewAdapter extends RecyclerView.Adapter<BmVcViewAdapter.BmVcVi
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
         int videocontentid = id;
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
 
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("hi",videocontentid);
 
-            new DeleteNetworkManager("/bookmarks/users/"+23+"/contents/video/"+videocontentid,jsonObject) {
+            new DeleteNetworkManager("/bookmarks/users/"+userID+"/contents/video/"+videocontentid,jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);

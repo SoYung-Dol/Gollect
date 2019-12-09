@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gollect.BaseActivity;
 import com.example.gollect.R;
 import com.example.gollect.adapter.TcViewAdapter;
 import com.example.gollect.item.TextContentsItem;
@@ -68,7 +69,9 @@ public class TextFragment extends Fragment{
     }
 
     private void getTextContents(){
-        new GetNetworkManager("/contents/text/users/"+23) {
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
+        new GetNetworkManager("/contents/text/users/"+userID) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

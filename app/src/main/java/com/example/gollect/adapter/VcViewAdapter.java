@@ -23,7 +23,6 @@ import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 import com.example.gollect.utility.PostNetworkManager;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -170,7 +169,7 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("videoContentId",contentId);
 
-            new PostNetworkManager("/bookmarks/users/"+23+"/contents/video",jsonObject) {
+            new PostNetworkManager("/bookmarks/users/"+userID+"/contents/video",jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);

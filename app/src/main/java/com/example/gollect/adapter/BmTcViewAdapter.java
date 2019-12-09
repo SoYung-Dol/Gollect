@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.gollect.BaseActivity;
 import com.example.gollect.MainActivity;
 import com.example.gollect.R;
 import com.example.gollect.item.BmTextContentsItem;
@@ -164,12 +165,14 @@ public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmVie
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());  // 아이템 삭제시 즉시 삭제 처리 되는 코드 3줄
         int textcontentid = id;
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
 
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("hi",textcontentid);
 
-            new DeleteNetworkManager("/bookmarks/users/"+23+"/contents/text/"+textcontentid,jsonObject) {
+            new DeleteNetworkManager("/bookmarks/users/"+userID+"/contents/text/"+textcontentid,jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);

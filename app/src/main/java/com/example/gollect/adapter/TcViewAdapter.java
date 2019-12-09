@@ -163,14 +163,14 @@ public class TcViewAdapter extends RecyclerView.Adapter<TcViewAdapter.TcViewHold
 
     private void addBookmark(int id){
         BaseActivity baseActivity = new BaseActivity();
-//        int userID = baseActivity.getUserData().getUserID();
+        int userID = baseActivity.getUserData().getUserID();
         int contentId = id;
 
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("textContentId",contentId);
 
-            new PostNetworkManager("/bookmarks/users/"+23+"/contents/text",jsonObject) {
+            new PostNetworkManager("/bookmarks/users/"+userID+"/contents/text",jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);

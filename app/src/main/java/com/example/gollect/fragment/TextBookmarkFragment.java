@@ -69,10 +69,10 @@ public class TextBookmarkFragment extends Fragment {
         return view;
     }
     private void getBmTextContents(){
-        //BaseActivity baseActivity = new BaseActivity();
-        //int userID = baseActivity.getUserData().getUserID();
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
 
-        new GetNetworkManager("/bookmarks/users/"+23+"/contents/text") {
+        new GetNetworkManager("/bookmarks/users/"+userID+"/contents/text") {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

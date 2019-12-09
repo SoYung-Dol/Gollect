@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gollect.BaseActivity;
 import com.example.gollect.R;
 import com.example.gollect.adapter.VcViewAdapter;
 import com.example.gollect.item.VideoContentsItem;
@@ -66,7 +67,9 @@ public class VideoFragment extends Fragment {
     }
 
     private void getVideoContents(){
-        new GetNetworkManager("/contents/video/users/"+23) {
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
+        new GetNetworkManager("/contents/video/users/"+userID) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

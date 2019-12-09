@@ -176,65 +176,12 @@ public class SubscribeActivity extends AppCompatActivity {
         }.execute();
     }
 
-    public void postPlatforms(){
-        try{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("userId",user_id);
-            jsonObject.accumulate("platformId",platform_id);
-            jsonObject.accumulate("keyword",keyword);
-
-            new PostNetworkManager(" /subscriptions/users/",jsonObject) {
-                @Override
-                public void errorCallback(int status) {
-                    super.errorCallback(status);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finishAffinity();
-                                    System.runFinalization();
-                                    System.exit(0);
-                                    dialog.dismiss();
-                                }
-                            };
-
-                            new android.app.AlertDialog.Builder(SubscribeActivity.this)
-                                    .setTitle(getString(R.string.network_err_msg))
-                                    .setPositiveButton(getString(R.string.ok), exitListener)
-                                    .setCancelable(false)
-                                    .show();
-                        }
-                    });
-                }
-
-                @Override
-                public void responseCallback(JSONObject responseJson) {
-
-                    try {
-                        if (responseJson.getBoolean("result")) {
-                            subscribeSuccess();
-
-                        }else{
-                            Log.d(TAG,"회원가입실패");
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.execute();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
-
     public void deletePlatform(int user_id, int platform_id){
-
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
 
         JSONObject jsonObject = new JSONObject();
-        new DeleteNetworkManager("/platforms/" + platform_id +"/users/"+ 23, jsonObject) {
+        new DeleteNetworkManager("/platforms/" + platform_id +"/users/"+ userID, jsonObject) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
@@ -278,13 +225,13 @@ public class SubscribeActivity extends AppCompatActivity {
 
     public ArrayList<String> getKeyword(int platform_number) {
         BaseActivity baseActivity = new BaseActivity();
-        int user_id = 23;
+        int userID = baseActivity.getUserData().getUserID();
         JSONObject jsonObject = new JSONObject();
         final ArrayList<String> idList = new ArrayList<>();
 
         //플랫폼 아이디 추가해야함
-        Log.d("Dawoon","/subscriptions/users/"+user_id +"/platforms/"+platform_number);
-        new GetNetworkManager("/subscriptions/users/"+user_id +"/platforms/"+platform_number) {
+        Log.d("Dawoon","/subscriptions/users/"+userID +"/platforms/"+platform_number);
+        new GetNetworkManager("/subscriptions/users/"+userID +"/platforms/"+platform_number) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
@@ -317,8 +264,6 @@ public class SubscribeActivity extends AppCompatActivity {
                     if (responseJson.getString("result").contains("success")) {
                         Log.d(TAG,responseJson.toString());
 
-//                        ArrayList<String> nameList = new ArrayList<>();
-//                        ArrayList<String> urlList = new ArrayList<>();
                         for (int i=0; i<responseJson.getJSONArray("keywords").length(); i++) {
                             idList.add(responseJson.getJSONArray("keywords").getJSONObject(i).getString("keyword")) ;
                         }
@@ -334,13 +279,16 @@ public class SubscribeActivity extends AppCompatActivity {
     }
 
     public void postAddKeyword(int user_id, int platform_id, String keyword){
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
+
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("userId",user_id);
             jsonObject.accumulate("platformId",platform_id);
             jsonObject.accumulate("keyword",keyword);
             Log.d(TAG,jsonObject.toString());
-            new PostNetworkManager("/subscriptions/users/23",jsonObject) {
+            new PostNetworkManager("/subscriptions/users/"+userID,jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
@@ -386,12 +334,13 @@ public class SubscribeActivity extends AppCompatActivity {
     }
 
     public void deleteKeyword(int user_id, int platform_id, String keyword){
-
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
 
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("keyword",keyword);
-        new DeleteNetworkManager("/subscriptions/users/" + 23 + "/platforms/" + platform_id + "/",jsonObject) {
+        new DeleteNetworkManager("/subscriptions/users/" + userID + "/platforms/" + platform_id + "/",jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
@@ -437,7 +386,9 @@ public class SubscribeActivity extends AppCompatActivity {
     }
 
     public void getPlatfromList(final int type){
-        new GetNetworkManager("/subscriptions/users/" + 23) {
+        BaseActivity baseActivity = new BaseActivity();
+        final int userID = baseActivity.getUserData().getUserID();
+        new GetNetworkManager("/subscriptions/users/" + userID) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
@@ -482,7 +433,7 @@ public class SubscribeActivity extends AppCompatActivity {
                                 getPlatforms(subsList);
                             case 2:
                                 for(int i =0;i<subsList.size();i++) {
-                                    postAddKeyword(23, subsList.get(i).getPlatformId(),keyword);
+                                    postAddKeyword(userID, subsList.get(i).getPlatformId(),keyword);
                                 }
                         }
                         Log.d(TAG, subsList.toString());
