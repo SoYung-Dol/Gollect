@@ -109,17 +109,21 @@ public class VideoFragment extends Fragment {
                     Integer videoContentId = jsonObject.getInt("videoContentId");
                     String platformId = jsonObject.getString("platform_id");
                     String title = jsonObject.getString("title");
-                    String thumbanil_src = jsonObject.getString("thumbnail_src");
+                    String thumbnail_src = jsonObject.getString("thumbnail_src");
                     String url = jsonObject.getString("url");
                     String duration = jsonObject.getString("duration");
                     String temp_uploaded_at = jsonObject.getString("uploaded_at");
                     int domainId = jsonObject.getInt("domain_id");
 
+                    if(thumbnail_src.charAt(0) != 'h')
+                        thumbnail_src = "https:"+thumbnail_src;
+
+
                     VideoContentsItem item = new VideoContentsItem(
                             videoContentId,
                             platformId,
                             title,
-                            thumbanil_src,
+                            thumbnail_src,
                             url,
                             duration,
                             temp_uploaded_at,

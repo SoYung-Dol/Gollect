@@ -34,12 +34,13 @@ public class NoticeViewAdapter extends RecyclerView.Adapter<NoticeViewAdapter.No
     public class NotiViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
-        private TextView id;
+        private TextView id, content;
 
         public NotiViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.notice_title);
             id = itemView.findViewById(R.id.notice_id);
+            content = itemView.findViewById(R.id.notice_content);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,6 +69,7 @@ public class NoticeViewAdapter extends RecyclerView.Adapter<NoticeViewAdapter.No
 
         holder.id.setText(item.getId());
         holder.title.setText(item.getTitle());
+        holder.content.setText(item.getContent());
     }
 
     @Override

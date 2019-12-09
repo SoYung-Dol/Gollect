@@ -123,6 +123,9 @@ public class VideoBookmarkFragment extends Fragment {
                     String temp_uploaded_at = jsonObject.getString("uploaded_at");
                     int domainId = jsonObject.getInt("domain_id");
 
+                    if(thumbnail_src.charAt(0) != 'h')
+                        thumbnail_src = "https:"+thumbnail_src;
+
                     BmVideoContentsItem item = new BmVideoContentsItem(
                             videoContentId,
                             platformId,

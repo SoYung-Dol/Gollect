@@ -18,7 +18,7 @@ import java.net.URL;
 import androidx.annotation.CallSuper;
 
 public abstract class DeleteNetworkManager extends AsyncTask<String, String, JSONObject> {
-    String URLPrefix = "http://106.10.54.174:8080";
+    String URLPrefix = "http://106.10.54.174";
     String urlAddress = "";
     JSONObject requestJson, responseJson;
 

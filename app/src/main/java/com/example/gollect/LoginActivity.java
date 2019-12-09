@@ -167,6 +167,7 @@ public class LoginActivity extends BaseActivity {
                         if (responseJson.getString("result").contains("success")) {
                             googleLoginStep3();
                         }else{
+                            Log.d("Login Failed : ", responseJson.toString());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

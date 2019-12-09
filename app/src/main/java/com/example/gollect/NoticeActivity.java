@@ -10,6 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.gollect.adapter.NoticeViewAdapter;
@@ -101,6 +102,7 @@ public class NoticeActivity extends BaseActivity {
 
             @Override
             public void responseCallback(JSONObject responseJson) {
+                Log.d("jaejin",responseJson.toString());
                 setContents(responseJson);
             }
         }.execute();
@@ -112,7 +114,7 @@ public class NoticeActivity extends BaseActivity {
                 jsonArray = new JSONArray(json.getJSONArray("notices").toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    int notice_id = jsonObject.getInt("notice_id");
+                    String notice_id = jsonObject.getString("notice_id");
                     String title = jsonObject.getString("title");
                     String content = jsonObject.getString("content");
 

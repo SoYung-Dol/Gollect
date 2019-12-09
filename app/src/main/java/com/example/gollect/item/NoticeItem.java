@@ -1,21 +1,21 @@
 package com.example.gollect.item;
 
 public class NoticeItem {
-    private int id;
+    private String id;
     private String title;
     private String content;
 
-    public NoticeItem(int id, String title, String content) {
+    public NoticeItem(String id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -140,10 +140,14 @@ public class RequestPlatformActivity extends BaseActivity {
         }
     }
     public void request_success(){
+        edit_content.setText("");
+        edit_title.setText("");
         toast = Toast.makeText(this, "요청 완료",Toast.LENGTH_SHORT);
         toast.show();
     }
     public void request_fail(){
+        edit_content.setText("");
+        edit_title.setText("");
         toast = Toast.makeText(this, "요청 실패",Toast.LENGTH_SHORT);
         toast.show();
     }

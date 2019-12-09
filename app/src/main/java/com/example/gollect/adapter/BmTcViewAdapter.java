@@ -120,24 +120,33 @@ public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmVie
         date = new Date(now);
         getTime = simpleDateFormat.format(date);
 
-        String date = item.getUploaded_at().substring(5,10);
+        String month  = item.getUploaded_at().substring(5,7);
+        String day  = item.getUploaded_at().substring(8,10);
+        String date = month + "/" + day;
+        String date2 = month + "-" + day;
         String time = item.getUploaded_at().substring(11,16);
         String currentDate = getTime.substring(5,10);
 
         if(item.getDomainId() == 1){
             holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_youtube));
         }else if(item.getDomainId() == 2){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_afreeca));
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_navertv));
         }else if(item.getDomainId() == 3){
-            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_twitch));
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_kakaotv));
         }else if(item.getDomainId() == 4){
             holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_dc));
         }else if(item.getDomainId() == 5){
             holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_inven));
+        }else if(item.getDomainId() == 6){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_ajou));
+        }else if(item.getDomainId() == 7){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_jungang));
+        }else if(item.getDomainId() == 8){
+            holder.platform.setImageDrawable(context.getDrawable(R.drawable.logo_yonhap));
         }
         holder.title.setText(item.getTitle());
         holder.summary.setText(item.getSummary());
-        if(date == currentDate) holder.upload_time.setText(time);
+        if(date2.equals(currentDate)) holder.upload_time.setText(time);
         else holder.upload_time.setText(date);
 
         Glide.with(holder.itemView.getContext())
