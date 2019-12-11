@@ -265,11 +265,9 @@ public class AlarmActivity extends AppCompatActivity {
                     if (responseJson.getString("result").contains("success")) {
                         Log.d(TAG,responseJson.toString());
                         for (int i=0; i<responseJson.getJSONArray("filterwords").length(); i++) {
-                            Log.d(TAG,responseJson.getJSONArray("filterwords").getString(i));
                             keywordList.add(responseJson.getJSONArray("filterwords").getString(i)) ;
                         }
                     }else{
-                        Log.d(TAG,responseJson.getString("result"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
