@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,11 +72,11 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
                     ((SubscribeRecyclerviewAdapter.CityViewHolder) holder).mTitle.setText(object.getPlatformName());
                     break;
                 case CHILD_TYPE:
+                    Log.d(TAG,"@@@@@@@@"+object.getPlatformName());
                     ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).platformName.setText(object.getPlatformName());
                     Glide.with(activity).load(mList.get(position).getImageUrl()).into(((SubscribeRecyclerviewAdapter.EventViewHolder) holder).platformLogo);
                     ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).subscriveBt.setVisibility(View.VISIBLE);
                     for (int i = 0; i < mSubsList.size(); i++) {
-
                         if (mList.get(position).getPlatformId() == mSubsList.get(i).getPlatformId()) {
                             Log.d(Constraints.TAG, "position: " + position + " size: " + mSubsList.size() + " Name: " + mSubsList.get(i).getPlatformName());
                             ((SubscribeRecyclerviewAdapter.EventViewHolder) holder).subscriveBt.setText("구독 취소");
@@ -137,11 +138,19 @@ public class SubscribeRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerV
             subscriveBt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d(TAG,"This position: " + getAdapterPosition());
                     if(subscriveBt.getText().toString().contains("취소")){
                         subscribeActivity.deletePlatform(userID,mList.get(getAdapterPosition()).getPlatformId());
                         subscriveBt.setText("구독");
                         keywordBt.setVisibility(View.INVISIBLE);
+                        PlatformData platform = new PlatformData(mList.get(getAdapterPosition()).getPlatformId(), false);
+                        for(int i =0;i<mSubsList.size();i++){
+                            if(mSubsList.get(i).getPlatformId()==mList.get(getAdapterPosition()).getPlatformId())
+                                mSubsList.remove(i);
+                        }
                     }else if(subscriveBt.getText().toString().contains("구독")) {
+                        PlatformData platform = new PlatformData(mList.get(getAdapterPosition()).getPlatformId(), true);
+                        mSubsList.add(platform);
                         subscribeActivity.postAddKeyword(userID, mList.get(getAdapterPosition()).getPlatformId(), "");
                         subscriveBt.setText("구독 취소");
                         keywordBt.setVisibility(View.VISIBLE);

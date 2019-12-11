@@ -431,10 +431,12 @@ public class SubscribeActivity extends AppCompatActivity {
                         switch(type){
                             case 1:
                                 getPlatforms(subsList);
+                                break;
                             case 2:
                                 for(int i =0;i<subsList.size();i++) {
                                     postAddKeyword(userID, subsList.get(i).getPlatformId(),keyword);
                                 }
+                                break;
                         }
                         Log.d(TAG, subsList.toString());
                     }else{

@@ -227,7 +227,7 @@ public class LoginActivity extends BaseActivity {
     }
     public void loginSuccess(int userid){
         getUserData().setUserID(userid);
-        Intent subscribeActivity = new Intent(this, SubscribeActivity.class);
-        startActivity(subscribeActivity);
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
     }
 }
