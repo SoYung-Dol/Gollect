@@ -23,7 +23,6 @@ import com.example.gollect.R;
 import com.example.gollect.item.TextContentsItem;
 import com.example.gollect.item.VideoContentsItem;
 import com.example.gollect.utility.PostNetworkManager;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;

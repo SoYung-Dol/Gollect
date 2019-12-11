@@ -16,8 +16,15 @@ public class AlarmApplication extends Application {
                 .schemaVersion(0)
                 .build();
 
+        RealmConfiguration keywordConfig = new RealmConfiguration.Builder()
+                .name("Gollect_Alarm_Keyword.realm")
+                .schemaVersion(5)
+                .build();
+
+
 
         //Realm에 셋팅한 정보 값을 지정
+        Realm keywordDB = Realm.getInstance(keywordConfig);
         Realm.setDefaultConfiguration(config);
     }
 }
