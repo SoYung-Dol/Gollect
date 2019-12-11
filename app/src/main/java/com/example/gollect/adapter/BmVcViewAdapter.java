@@ -140,8 +140,10 @@ public class BmVcViewAdapter extends RecyclerView.Adapter<BmVcViewAdapter.BmVcVi
 
             switch (id){
                 case R.id.delete_menu:
-                    int videoContentId = items.get(getAdapterPosition()).getVideoContentId();
-                    deleteBookmark(videoContentId,getAdapterPosition());
+                    if(getAdapterPosition() >= 0) {
+                        int videoContentId = items.get(getAdapterPosition()).getVideoContentId();
+                        deleteBookmark(videoContentId, getAdapterPosition());
+                    }
                     break;
             }
             return true;

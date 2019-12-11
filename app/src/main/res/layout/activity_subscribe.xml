@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@color/colorBeige"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/subscribe_title"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:gravity="center_vertical"
-        android:text="Gollect"
-        android:textColor="@color/gollectLight"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/allkeywordBt"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBeige"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/gollectLight" />
 
     <Button
         android:id="@+id/allkeywordBt"
@@ -44,7 +45,7 @@
         android:layout_height="0dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/subscribe_title">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_platform"

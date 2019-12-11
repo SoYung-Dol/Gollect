@@ -85,8 +85,10 @@ public class BmTcViewAdapter extends  RecyclerView.Adapter<BmTcViewAdapter.BmVie
 
             switch (id){
                 case R.id.delete_menu:
-                    Integer textContentId = items.get(getAdapterPosition()).getTextContentId();
-                    deleteBookmark(textContentId,getAdapterPosition());
+                    if(getAdapterPosition() >= 0) {
+                        Integer textContentId = items.get(getAdapterPosition()).getTextContentId();
+                        deleteBookmark(textContentId, getAdapterPosition());
+                    }
                     break;
             }
             return true;

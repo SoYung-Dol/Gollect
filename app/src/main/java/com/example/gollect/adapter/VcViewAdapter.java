@@ -147,8 +147,10 @@ public class VcViewAdapter extends RecyclerView.Adapter<VcViewAdapter.ViewHolder
 
             switch (id){
                 case R.id.bookmark_menu:
-                    Integer videoContentId = items.get(getAdapterPosition()).getVideoContentId();
-                    addBookmark(videoContentId);
+                    if(getAdapterPosition() >= 0) {
+                        Integer videoContentId = items.get(getAdapterPosition()).getVideoContentId();
+                        addBookmark(videoContentId);
+                    }
                     break;
             }
             return true;

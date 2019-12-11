@@ -86,8 +86,10 @@ public class TcViewAdapter extends RecyclerView.Adapter<TcViewAdapter.TcViewHold
 
             switch (id){
                 case R.id.bookmark_menu:
-                    Integer textContentId = items.get(getAdapterPosition()).getTextContentId();
-                    addBookmark(textContentId);
+                    if(getAdapterPosition() >= 0) {
+                        Integer textContentId = items.get(getAdapterPosition()).getTextContentId();
+                        addBookmark(textContentId);
+                    }
                     break;
             }
             return true;

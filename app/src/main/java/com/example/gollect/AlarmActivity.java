@@ -3,9 +3,11 @@ package com.example.gollect;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.gollect.utility.BackPressCloseHandler;
 import com.example.gollect.utility.DeleteNetworkManager;
 import com.example.gollect.utility.GetNetworkManager;
 import com.example.gollect.utility.PostNetworkManager;
@@ -30,12 +34,14 @@ public class AlarmActivity extends AppCompatActivity {
     private FlowLayout mHashtagContainer;
     private String TAG = "AlarmActivity";
     final FlowLayout.LayoutParams hashTagLayoutParams = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
+        backPressCloseHandler = new BackPressCloseHandler(this);
         final EditText enterKeywordView = findViewById(R.id.enterAlarmKeyword);
         Button addKeywordBt = findViewById(R.id.addAlarmKeyword);
         addKeywordBt.setOnClickListener(new View.OnClickListener()
@@ -48,7 +54,29 @@ public class AlarmActivity extends AppCompatActivity {
                 enterKeywordView.setText("");
             }
         });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_gollect_light_24dp);
+        getSupportActionBar().setTitle("알림 키워드 설정");
+        toolbar.setTitleTextColor(Color.BLACK);
         setKeyword();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
     }
 
     private void setKeyword()

@@ -7,39 +7,41 @@
     android:layout_height="match_parent"
     tools:context="com.example.gollect.AlarmActivity">
 
-    <TextView
-        android:id="@+id/alarm_title"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:gravity="center_vertical"
-        android:text="Gollect"
-        android:textColor="@color/gollectLight"
-        android:textSize="20dp"
-        android:paddingLeft="10dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorBeige"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/gollectLight" />
 
     <EditText
         android:id="@+id/enterAlarmKeyword"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="96dp"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/addAlarmKeyword"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addAlarmKeyword"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/submit_button"
         android:text="추가"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.wefika.flowlayout.FlowLayout
         android:id="@+id/hashtagContainer"
