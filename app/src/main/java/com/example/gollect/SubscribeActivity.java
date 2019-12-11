@@ -54,7 +54,6 @@ public class SubscribeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_subscribe);
         backPressCloseHandler = new BackPressCloseHandler(this);
         Button completeBt = findViewById(R.id.completeBt);
-        Button allKeywordBt = findViewById(R.id.allkeywordBt);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -62,48 +61,6 @@ public class SubscribeActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_gollect_light_24dp);
         getSupportActionBar().setTitle("내 구독 정보 설정");
         toolbar.setTitleTextColor(Color.BLACK);
-        allKeywordBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SubscribeActivity.this);
-
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.custom_dialog,null);
-
-                builder.setView(dialogView);
-
-                Button one = (Button) dialogView.findViewById(R.id.button1);
-                Button three = (Button) dialogView.findViewById(R.id.button3);
-                final EditText enterKeyword = (EditText)dialogView.findViewById(R.id.enterKeyword);
-
-                final AlertDialog dialog = builder.create();
-
-
-                one.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        dialog.cancel();
-                    }
-                });
-
-                three.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        keyword = enterKeyword.getText().toString();
-                        enterKeyword.setText("");
-                        getPlatfromList(2);
-                    }
-                });
-                dialog.setCanceledOnTouchOutside(false);
-
-                // Display the custom alert dialog on interface
-                dialog.show();
-            }
-        });
 
         completeBt.setOnClickListener(new View.OnClickListener() {
             @Override
