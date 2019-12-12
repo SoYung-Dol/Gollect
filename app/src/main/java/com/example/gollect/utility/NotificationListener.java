@@ -17,19 +17,23 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.gollect.AlarmActivity;
+import com.example.gollect.AlarmApplication;
 import com.example.gollect.AlarmData;
 import com.example.gollect.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 
 public class NotificationListener extends NotificationListenerService {
     public final static String TAG = "NotificationListener";
     ArrayList<String> keywordList = new ArrayList<String>();
+    List<String> dummy = Arrays.asList(new String[]{ "재진", "쪼낙"});
 
     //앱에 설치된 Realm파일을 찾아서 가져오는 코드
     //Realm keywordDB = Realm.getInstance(keywordConfig);
@@ -73,29 +77,32 @@ public class NotificationListener extends NotificationListenerService {
         DateFormat df = new SimpleDateFormat("HH:mm:ss"); // HH=24h, hh=12h
         final Date date = new Date(sbn.getPostTime());
 
-        AlarmActivity alarmActivity = new AlarmActivity();
-        keywordList = alarmActivity.getKeyword();
-        //Realm에 객체(데이터) 저장
+        if(text != null && !sbn.getNotification().toString().contains("quiet_new_message")) {
+            //AlarmActivity alarmActivity = new AlarmActivity();
+            //keywordList = alarmActivity.getKeyword();
+            AlarmApplication alarmApplication = new AlarmApplication();
+            keywordList = alarmApplication.getKeywordList();
+            //Realm에 객체(데이터) 저장
 
-        Handler delayHandler = new Handler();
-        delayHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // TODO
-                Log.d(TAG, "ALARM KEYWORD: " + keywordList.toString());
-                if(text != null) {
-                    for(int i =0;i<keywordList.size();i++) {
-                        Log.d("비교하자!!",text + ":"+keywordList.get(i));
-                        if (text.toString().contains(keywordList.get(i)))
-                            NotificationListener.this.cancelNotification(sbn.getKey());
+            Handler delayHandler = new Handler();
+            delayHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // TODO
+                    Log.d(TAG, "ALARM KEYWORD: " + keywordList.toString());
+                    if (text != null) {
+                        for (int i = 0; i < keywordList.size(); i++) {
+                            Log.d("비교하자!!", text + ":" + keywordList.get(i));
+                            if (text.toString().contains(keywordList.get(i)))
+                                NotificationListener.this.cancelNotification(sbn.getKey());
+                        }
                     }
+
+
+                    addAlarm(sbn.getPackageName(), title, text.toString(), date, notificationIcon);
                 }
-
-                if(text != null && !sbn.getNotification().toString().contains("quiet_new_message"))
-                    addAlarm(sbn.getPackageName(),title, text.toString(), date, notificationIcon);
-            }
-        }, 200);
-
+            }, 200);
+        }
     }
 
 

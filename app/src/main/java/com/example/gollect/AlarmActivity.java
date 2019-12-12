@@ -204,7 +204,7 @@ public class AlarmActivity extends AppCompatActivity {
         final ArrayList<String> keywordList = new ArrayList<>();
 
         //플랫폼 아이디 추가해야함
-        new GetNetworkManager( "/filterwords/users/" +23) {
+        new GetNetworkManager( "/filterwords/users/" +34) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);
