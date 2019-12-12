@@ -49,14 +49,6 @@ public class MainActivity extends BaseActivity {
         }
 
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
-  /*
-        tabLayout.addTab(tabLayout.newTab().setText("텍스트"));
-        tabLayout.addTab(tabLayout.newTab().setText("동영상"));
-        tabLayout.addTab(tabLayout.newTab().setText("텍스트 즐찾"));
-        tabLayout.addTab(tabLayout.newTab().setText("동영상 즐찾"));
-        tabLayout.addTab(tabLayout.newTab().setText("알림"));
-        tabLayout.addTab(tabLayout.newTab().setText("설정"));
-   */
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.texticon_gollect_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.videoicon_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.textbookmark_black_24dp));

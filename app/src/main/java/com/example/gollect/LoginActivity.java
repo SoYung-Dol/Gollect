@@ -163,7 +163,11 @@ public class LoginActivity extends BaseActivity {
                 public void responseCallback(JSONObject responseJson) {
                     try {
                         if (responseJson.getString("result").contains("success")) {
-                            googleLoginStep3();
+                            if(responseJson.getInt("flag") == 2){
+                                googleLoginStep3(2);
+                            }else if(responseJson.getInt("flag") == 1){
+                                googleLoginStep3(1);
+                            }
                         }else{
                             Log.d("Login Failed : ", responseJson.toString());
                         }
@@ -178,7 +182,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     //로그인
-    public void googleLoginStep3() {
+    public void googleLoginStep3(final int isRegister) {
         new GetNetworkManager("/users/"+user_hash) {
             @Override
             public void errorCallback(int status) {
@@ -215,7 +219,7 @@ public class LoginActivity extends BaseActivity {
                         JSONArray jsonArray = new JSONArray(responseJson.getJSONArray("user").toString());
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                         int userId = jsonObject.getInt("id");
-                        loginSuccess(userId);
+                        loginSuccess(userId,isRegister);
                     }else{
                         Log.d(TAG,"로그인실패");
                     }
@@ -225,9 +229,15 @@ public class LoginActivity extends BaseActivity {
             }
         }.execute();
     }
-    public void loginSuccess(int userid){
+    public void loginSuccess(int userid,int isRegister){
         getUserData().setUserID(userid);
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
+        if(isRegister == 2){
+            Intent mainActivity = new Intent(this, MainActivity.class);
+            startActivity(mainActivity);
+        }else if(isRegister == 1){
+            Intent subscribeActivity = new Intent(this, SubscribeActivity.class);
+            startActivity(subscribeActivity);
+        }
+
     }
 }

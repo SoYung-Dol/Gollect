@@ -2,11 +2,15 @@ package com.example.gollect;
 
 import android.app.Application;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class AlarmApplication extends Application {
 
+    static AlarmActivity alarmActivity = new AlarmActivity();
+    public static ArrayList<String> keywordList = alarmActivity.getKeyword();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,5 +30,13 @@ public class AlarmApplication extends Application {
         //Realm에 셋팅한 정보 값을 지정
         Realm keywordDB = Realm.getInstance(keywordConfig);
         Realm.setDefaultConfiguration(config);
+    }
+
+    public static ArrayList<String> getKeywordList() {
+        return keywordList;
+    }
+
+    public static void setKeywordList(ArrayList<String> keywordList) {
+        AlarmApplication.keywordList = keywordList;
     }
 }

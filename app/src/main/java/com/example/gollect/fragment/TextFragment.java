@@ -1,6 +1,8 @@
 package com.example.gollect.fragment;
 
 import android.content.DialogInterface;
+import android.database.DataSetObservable;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -120,6 +122,7 @@ public class TextFragment extends Fragment{
                     String temp_uploaded_at = jsonObject.getString("uploaded_at");
                     int domainId = jsonObject.getInt("domain_id");
 
+                    Log.d("jaejin",temp_uploaded_at);
                     TextContentsItem item = new TextContentsItem(
                             textContentId,
                             platformId,

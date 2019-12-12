@@ -125,11 +125,13 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     public void postAddKeyword(String keyword){
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("filterword",keyword);
             Log.d(TAG,jsonObject.toString());
-            new PostNetworkManager("/filterwords/users/"+ 23,jsonObject) {
+            new PostNetworkManager("/filterwords/users/"+ userID,jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
@@ -175,12 +177,13 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     public void deleteKeyword(String keyword){
-
+        BaseActivity baseActivity = new BaseActivity();
+        int userID = baseActivity.getUserData().getUserID();
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("filterword", keyword);
             Log.d(TAG, "JSON file: "+jsonObject.toString());
-            new DeleteNetworkManager("/filterwords/users/" + 23, jsonObject) {
+            new DeleteNetworkManager("/filterwords/users/" + userID, jsonObject) {
                 @Override
                 public void errorCallback(int status) {
                     super.errorCallback(status);
@@ -227,12 +230,11 @@ public class AlarmActivity extends AppCompatActivity {
 
     public ArrayList<String> getKeyword() {
         BaseActivity baseActivity = new BaseActivity();
-        int user_id = 23;
-        JSONObject jsonObject = new JSONObject();
+//        int userID = baseActivity.getUserData().getUserID();
         final ArrayList<String> keywordList = new ArrayList<>();
 
         //플랫폼 아이디 추가해야함
-        new GetNetworkManager( "/filterwords/users/" +23) {
+        new GetNetworkManager( "/filterwords/users/" +34) {
             @Override
             public void errorCallback(int status) {
                 super.errorCallback(status);

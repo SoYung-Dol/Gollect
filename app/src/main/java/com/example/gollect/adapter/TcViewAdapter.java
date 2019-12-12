@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.DataSetObserver;
 import android.net.Uri;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -44,11 +45,13 @@ public class TcViewAdapter extends RecyclerView.Adapter<TcViewAdapter.TcViewHold
     private Date date;
     private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private String getTime;
+    private int order;
 
     public TcViewAdapter(List<TextContentsItem> listitems, Context context){
         this.items = listitems;
         this.context = context;
     }
+
     public class TcViewHolder extends RecyclerView.ViewHolder
             implements View.OnCreateContextMenuListener, View.OnClickListener, MenuItem.OnMenuItemClickListener{
 
